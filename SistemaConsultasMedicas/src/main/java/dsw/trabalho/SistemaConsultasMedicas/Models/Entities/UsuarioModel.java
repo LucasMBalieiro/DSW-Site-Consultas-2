@@ -11,6 +11,9 @@ import java.io.Serial;
 import java.io.Serializable;
 import java.util.UUID;
 
+@Entity
+@Table(name = "TB_USUARIOS")
+@Inheritance(strategy = InheritanceType.JOINED)
 public class UsuarioModel extends RepresentationModel<UsuarioModel> implements Serializable {
 
     @Serial
@@ -33,13 +36,11 @@ public class UsuarioModel extends RepresentationModel<UsuarioModel> implements S
     @NotNull
     private String nome;
 
-
     @Column(name = "papel",unique = false,nullable = true)
     @NotNull
     private String papel;
 
     public UsuarioModel(String papel) {
-
         this.papel = papel;
     }
 

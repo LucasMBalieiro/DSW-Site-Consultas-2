@@ -6,11 +6,12 @@ import dsw.trabalho.SistemaConsultasMedicas.Models.ValueObjects.Telefone;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
-public record PacienteRecordDto(@NotNull Cpf cpf,
-                                @NotNull Email email,
-                                @NotBlank String senha,
+public record PacienteRecordDto(@NotBlank String nome,
+                                @NotNull Cpf cpf,
                                 @NotNull Telefone telefone,
                                 @NotBlank String sexo,
-                                @NotBlank String dataNascimento)
+                                @NotBlank String dataNascimento,
+                                @NotNull Email email,
+                                @NotBlank String senha)
 {
 }

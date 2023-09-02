@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html layout:decorate="~{layout}">
+<head>
+    <meta charset="UTF-8" />
+</head>
+<body>
+<section class="layout-content" layout:fragment="corpo">
+
+    <nav class="navbar navbar-expand-md bg-light">
+        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active"><i class="oi oi-caret-right"></i>
+                    <span th:text="#{paciente.cadastrar.label}"></span></li>
+            </ul>
+            <a class="btn btn-primary btn-md" th:href="@{/admin/listarPaciente}"
+               role="button"> <span class="oi oi-spreadsheet" title="Listar"
+                                    aria-hidden="true"></span> <span th:text="#{medico.listar.label}"></span>
+            </a>
+        </div>
+    </nav>
+
+    <div class="container" id="cadastro">
+
+        <div th:replace="fragments/alert"></div>
+
+        <form
+                th:action="${paciente.id == null} ? @{/paciente/salvar} : @{/paciente/editar}"
+                th:object="${paciente}" method="POST">
+
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="nome" th:text="#{nome.label}"></label>
+                    <input type="text" class="form-control" id="nome" th:attr="placeholder=#{nome.label}"
+                           autofocus="autofocus" th:field="*{nome}"
+                           th:classappend="${#fields.hasErrors('nome')} ? is-invalid" />
+
+                    <div class="invalid-feedback">
+                        <span th:errors="*{nome}"></span>
+                    </div>
+                </div>
+
+                <div class="form-group col-md-6">
+                    <label for="email" th:text="#{email.label}"></label>
+                    <input type="text" class="form-control" id="email" th:attr="placeholder=#{email.label}"
+                           autofocus="autofocus" th:field="*{email}"
+                           th:classappend="${#fields.hasErrors('email')} ? is-invalid" />
+
+                    <div class="invalid-feedback">
+                        <span th:errors="*{email}"></span>
+                    </div>
+                </div>
+
+                <div class="form-group col-md-6">
+
+                    <label for="senha" th:text="#{senha.label}"></label>
+                    <input type="senha" class="form-control" id="senha" th:attr="placeholder=#{senha.label}"
+                           autofocus="autofocus" th:field="*{senha}" />
+<!--                           th:classappend="${(#fields.hasErrors('senha') && locadora.id == null) || (locadora.id != null && (#fields.errors('email').size > 1 || 3 > locadora.email.length()) ) } ? is-invalid" />-->
+                    <div class="invalid-feedback">
+                        <span th:errors="*{senha}"></span>
+                    </div>
+                </div>
+
+                <div class="form-group col-md-6">
+
+                    <label for="telefone" th:text="#{telefone.label}"></label>
+                    <input type="text" class="form-control" id="telefone" placeholder="(XX)XXXXX-XXXX"
+                           autofocus="autofocus" th:field="*{telefone}"
+                           th:classappend="${(#fields.hasErrors('telefone') && paciente.id == null) || (paciente.id != null && (#fields.errors('telefone').size > 1 || 1 > paciente.telefone.length())) } ? is-invalid"
+                           data-mask='(00)00000-0000'/>
+
+
+                    <div class="invalid-feedback">
+                        <span th:errors="*{telefone}"></span>
+                    </div>
+                </div>
+
+                <div class="form-group col-md-6">
+                    <label for="CPF" th:text="#{CPF.label}"></label>
+                    <input type="text" class="form-control" id="CPF" placeholder="___.___.___-__"
+                           th:readonly="${paciente.id != null}"
+                           autofocus="autofocus" th:field="*{CPF}"
+                           th:classappend="${#fields.hasErrors('CNPJ') && paciente.id == null} ? is-invalid"
+                           data-mask="000.000.000-00" />
+
+                    <div class="invalid-feedback">
+                        <span th:errors="*{CPF}"></span>
+                    </div>
+                </div>
+            </div>
+
+            <input type="hidden" id="id" th:field="*{id}" />
+            <button type="submit" class="btn btn-primary btn-sm" th:text="#{salvar.label}"></button>
+        </form>
+    </div>
+
+    <script th:inline="javascript">
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('papel').value = 'paciente';
+        });
+    </script>
+</section>
+</body>
+</html>

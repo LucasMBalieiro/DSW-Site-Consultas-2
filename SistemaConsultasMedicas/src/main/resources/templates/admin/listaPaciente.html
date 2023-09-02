@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html layout:decorate="~{layout}">
+<head>
+    <meta charset="UTF-8" />
+</head>
+<body>
+<section class="layout-content" layout:fragment="corpo">
+
+    <nav class="navbar navbar-expand-md bg-light">
+        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <i class="oi oi-caret-right"></i>
+                    <span th:text="#{paciente.listar.label}"></span>
+                </li>
+            </ul>
+            <a class="btn btn-primary btn-md" th:href="@{/admin/cadastrarPaciente}" role="button" sec:authorize="hasRole('ROLE_Admin')">
+                <span class="oi oi-plus" title="Cadastro" aria-hidden="true"></span>
+                <span th:text="#{paciente.nova.label}"></span>
+            </a>
+        </div>
+    </nav>
+
+    <script>
+        function filterFunction() {
+            // Declare variables
+            var input, filter, table, tr, td, i, selectedValue;
+            input = document.getElementById("modelFilter");
+            selectedValue = input.value.toUpperCase();
+            table = document.getElementById("cidade");
+            tr = table.getElementsByTagName("tr");
+
+            // Loop through all table rows, and hide those that don't match the selected value
+            for (i = 0; i < tr.length; i++) {
+                td = tr[i].getElementsByTagName("td")[5]; // índice 5 representa a coluna da cidade
+                if (td) {
+                    var cityName = td.textContent || td.innerText;
+                    if (selectedValue === "" || selectedValue === cityName.toUpperCase()) {
+                        tr[i].style.display = "table-row";
+                    } else {
+                        tr[i].style.display = "none";
+                    }
+                }
+            }
+        }
+    </script>
+
+    <div class="container" id="listagem"></div>
+
+    <div class="form-group">
+        <label for="cidade" th:text="#{filtro.label}"></label>
+        <select id="modelFilter" class="form-control" onchange="filterFunction()">
+            <option value="" th:text="#{filtro.city.label}"></option>
+            <option th:each="paciente : ${paciente}" th:value="${paciente.CPF}" th:text="${paciente.especialidade}"></option>
+        </select>
+    </div>
+
+    <div th:replace="fragments/alert"></div>
+
+    <div class="table-responsive">
+        <table id="cidade" class="table table-striped table-hover table-sm">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th th:text="#{CPF.label}"></th>
+                <th th:text="#{nome.label}"></th>
+                <th th:text="#{email.label}"></th>
+                <th th:text="#{telefone.label}"></th>
+                <th th:text="#{sexo.label}"></th>
+                <th th:text="#{dataNascimento.label}"></th>
+                <th th:text="#{acao.label}" sec:authorize="hasRole('ROLE_Admin')"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="PacienteModel : ${paciente}">
+                <td th:text="${PacienteModel.id}" data-cidade="${PacienteModel.cidade}"></td>
+                <td th:text="${PacienteModel.CPF}"></td>
+                <td th:text="${PacienteModel.nome}"></td>
+                <td th:text="${PacienteModel.email}"></td>
+                <td th:text="${PacienteModel.telefone}"></td>
+                <td th:text="${PacienteModel.sexo}"></td>
+                <td th:text="${PacienteModel.dataNascimento}"></td>
+                <td colspan="2" sec:authorize="hasRole('ROLE_Admin')">
+                    <a class="btn btn-info btn-sm" th:href="@{/admin/editarPaciente/{id} (id=${PacienteModel.id}) }"
+                       role="button" >
+                        <span class="oi oi-brush" title="Editar" aria-hidden="true"> </span>
+                    </a>
+                    <button th:id="${#strings.concat('btn_paciente/excluirPacientePorId/', PacienteModel.id)}"
+                            type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#myModal">
+                        <span class="oi oi-circle-x" title="Excluir" aria-hidden="true"></span>
+                    </button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    </div>
+
+    <div th:replace="fragments/modal :: modal"></div>
+</section>
+</body>
+</html>
