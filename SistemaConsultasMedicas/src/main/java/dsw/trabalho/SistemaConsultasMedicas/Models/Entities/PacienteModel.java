@@ -7,6 +7,7 @@ import dsw.trabalho.SistemaConsultasMedicas.Models.ValueObjects.*;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 //import lombok.Getter;
+import jakarta.validation.constraints.Size;
 import org.springframework.hateoas.RepresentationModel;
 
 import java.io.Serial;
@@ -16,24 +17,13 @@ import java.util.UUID;
 //
 @Entity
 @Table(name = "TB_PACIENTES")
-public class PacienteModel extends RepresentationModel<PacienteModel> implements Serializable {
+public class PacienteModel extends UsuarioModel {
 
-    @Serial
-    private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID idPaciente;
-
     @Column(name = "cpf",unique = true,nullable = false)
     @Convert(converter = CpfConverter.class)
     @NotNull Cpf cpf;
-
-    @Column(name = "email",unique = true,nullable = false)
-    @Convert(converter = EmailConverter.class)
-    @NotNull
-    private Email email;
-    private String senha;
 
 
     @Column(name = "telefone",unique = true,nullable = false)
@@ -41,25 +31,22 @@ public class PacienteModel extends RepresentationModel<PacienteModel> implements
     @NotNull
     private Telefone telefone;
 
-
+    @Column(name = "sexo",unique = false,nullable = false)
+    @NotNull(message = "{NotNull.paciente.sexo}")
+    @Size(max=1, min = 1, message = "{Size.paciente.sexo}")
     private String sexo;
+
+    @Column(name = "dataNascimento",unique = false,nullable = false)
+    @NotNull
     private String dataNascimento;
 
-    public UUID getIdPaciente() {return idPaciente;}
-
-    public void setIdPaciente(UUID idPaciente) {this.idPaciente = idPaciente;}
+    public PacienteModel() {
+        super("paciente");
+    }
 
     public Cpf getCpf() {return cpf;}
 
     public void setCpf(Cpf cpf) {this.cpf = cpf;}
-
-    public Email getEmail() {return email;}
-
-    public void setEmail(Email email) {this.email = email;}
-
-    public String getSenha() {return senha;}
-
-    public void setSenha(String senha) {this.senha = senha;}
 
     public Telefone getTelefone() {return telefone;}
 

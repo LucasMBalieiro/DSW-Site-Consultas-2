@@ -15,48 +15,23 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "TB_MEDICOS")
-public class MedicoModel extends RepresentationModel<MedicoModel> implements Serializable {
-    //todo crm e especialidade
-    private static final long serialVersionUID = 1L;
+public class MedicoModel extends UsuarioModel {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID idMedico;//todo trocar de string pra value object
-    private String nome;
-
     @Column(name = "crm",unique = true,nullable = false)
     @Convert(converter = CrmConverter.class)
     @NotNull
-
     private Crm crm;
 
-
-    private String especialidade;
-
-    @Column(name = "email",unique = true,nullable = false)
-    @Convert(converter = EmailConverter.class)
+    @Column(name = "especialidade",unique = false,nullable = false)
     @NotNull
-    private Email email;
-    private String senha;
+    private String especialidade;
 
     //@OneToMany(mappedBy = "medico")
     //private List<ConsultaModel> consultas;
 
-
-    public UUID getIdMedico() {
-        return idMedico;
-    }
-
-    public void setIdMedico(UUID idMedico) {
-        this.idMedico = idMedico;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
+    public MedicoModel() {
+        super("medico");
     }
 
     public Crm getCrm() {return crm;}
@@ -73,21 +48,6 @@ public class MedicoModel extends RepresentationModel<MedicoModel> implements Ser
         this.especialidade = especialidade;
     }
 
-    public Email getEmail() {
-        return email;
-    }
-
-    public void setEmail(Email email) {
-        this.email = email;
-    }
-
-    public String getSenha() {
-        return senha;
-    }
-
-    public void setSenha(String senha) {
-        this.senha = senha;
-    }
 
 
 }
