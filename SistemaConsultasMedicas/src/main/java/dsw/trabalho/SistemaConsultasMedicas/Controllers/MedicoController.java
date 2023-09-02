@@ -2,8 +2,10 @@ package dsw.trabalho.SistemaConsultasMedicas.Controllers;
 
 
 import dsw.trabalho.SistemaConsultasMedicas.Dtos.MedicoRecordDto;
+import dsw.trabalho.SistemaConsultasMedicas.Models.Entities.ConsultaModel;
 import dsw.trabalho.SistemaConsultasMedicas.Models.Entities.MedicoModel;
 import dsw.trabalho.SistemaConsultasMedicas.Models.ValueObjects.Crm;
+import dsw.trabalho.SistemaConsultasMedicas.Repositories.ConsultaRepository;
 import dsw.trabalho.SistemaConsultasMedicas.Repositories.MedicoRepository;
 import jakarta.validation.Valid;
 import org.springframework.beans.BeanUtils;
@@ -11,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,11 +23,15 @@ import java.util.UUID;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
-@RestController
+@Controller
+@RequestMapping("/medicos")
 public class MedicoController {
 
     @Autowired
     MedicoRepository medicoRepository;//ponto de injecaom
+    @Autowired
+    ConsultaRepository consultaRepository;
+
     private final PasswordEncoder encoder;
 
     public MedicoController(PasswordEncoder encoder, MedicoRepository medicoRepository) {
@@ -32,6 +39,18 @@ public class MedicoController {
         this.medicoRepository = medicoRepository;
     }
 
+    @GetMapping("/listarConsultas")
+    public List<ConsultaModel> ListarConsultas(@RequestBody  @Valid MedicoRecordDto medicoRecordDto)
+    {
+        List<ConsultaModel> ConsultasDoMedico;
+        ConsultasDoMedico =consultaRepository.findByMedico(medicoRecordDto.crm());
+
+        return ConsultasDoMedico;
+    }
+
+
+
+    /*
     @PostMapping("/profissionais") //create
     public ResponseEntity<MedicoModel> saveMedico(@RequestBody  @Valid MedicoRecordDto medicoRecordDto){
         var medicoModel = new MedicoModel();
@@ -99,7 +118,7 @@ public class MedicoController {
         }
         medicoRepository.delete(medico0.get());
         return ResponseEntity.status(HttpStatus.OK).body("Deletado corretamente");//salva
-    }
+    }*/
 
 
 
