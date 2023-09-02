@@ -14,4 +14,6 @@ public interface PacienteRepository extends JpaRepository<PacienteModel, UUID> {
 
     @Query(value = "SELECT * FROM TB_PACIENTES pacientes WHERE pacientes.cpf = :cpf", nativeQuery = true)
     public PacienteModel findByCpf(@Param("cpf") Cpf cpf);
+
+    void deleteByCpf(Cpf cpf);
 }
