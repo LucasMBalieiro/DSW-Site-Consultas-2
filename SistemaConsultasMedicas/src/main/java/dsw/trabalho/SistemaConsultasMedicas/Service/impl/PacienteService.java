@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 @Service
 @Transactional(readOnly = false)
@@ -25,8 +27,15 @@ public class PacienteService implements IPacienteService {
         pacienteRepository.deleteByCpf(cpf);
     }
 
+    public void excluirPorID(UUID id){pacienteRepository.deleteById(id);}
+
     @Transactional(readOnly = true)
     public List<PacienteModel> buscarTodos(){
         return pacienteRepository.findAll();
+    }
+
+    @Transactional(readOnly = true)
+    public Optional<PacienteModel> buscarPorID(UUID id){
+        return pacienteRepository.findById(id);
     }
 }

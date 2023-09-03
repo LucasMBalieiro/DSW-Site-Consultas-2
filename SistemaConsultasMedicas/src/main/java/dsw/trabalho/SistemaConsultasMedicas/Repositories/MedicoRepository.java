@@ -16,12 +16,17 @@ import java.util.UUID;
 @Repository
 public interface MedicoRepository extends JpaRepository<MedicoModel, UUID> {
 
-
     @Query(value = "SELECT * FROM TB_MEDICOS medicos WHERE medicos.nome = :nome", nativeQuery = true)
     public List<MedicoModel> findByNome(@Param("nome") String nome);
 
     @Query(value = "SELECT * FROM TB_MEDICOS medicos WHERE medicos.crm = :crm", nativeQuery = true)
     public MedicoModel findByCrm(@Param("crm") Crm crm);
+
+    @Query(value = "SELECT * FROM TB_MEDICOS medicos WHERE medicos.especialidade = :especialidade", nativeQuery = true)
+    public List<MedicoModel> findByEspecialidade(@Param("especialidade") String especialidade);
+
+    @Query(value = "SELECT especialidade FROM TB_MEDICOS medicos", nativeQuery = true)
+    public List<String> findEspecialidades();
 
 
     void deleteByCrm(Crm id);

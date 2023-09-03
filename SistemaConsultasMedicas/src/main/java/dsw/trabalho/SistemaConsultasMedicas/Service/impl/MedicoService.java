@@ -10,6 +10,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 @Service
 @Transactional(readOnly = false)
@@ -26,29 +28,24 @@ public class MedicoService implements IMedicoService {
         dao.save(medico);
     }
 
-    public void excluir(Crm id) {
-        dao.deleteByCrm(id);
+    public void excluir(Crm crm) { dao.deleteByCrm(crm);}
+
+    public void excluirPorID(UUID id) {
+        dao.deleteById(id);
     }
 
     @Transactional(readOnly = true)
-    public List<String> buscarEspecialidades() {
-        return dao.findAll();
-    }
+    public List<String> buscarEspecialidades() { return dao.findEspecialidades(); }
 
     @Transactional(readOnly = true)
-    public List<MedicoModel> buscarMedicoPorCRM(Crm crm) {
-        return consultaDao.findAllById(dao.findByCrm(crm));
-    }
+    public MedicoModel buscarMedicoPorCRM(Crm crm) { return dao.findByCrm(crm); }
 
     @Transactional(readOnly = true)
-    public List<MedicoModel> buscarPorEspecialidade(String especialidade) {
-        return dao.findAllById(especialidade);
-    }
+    public Optional<MedicoModel> buscarMedicoPorID(UUID id) { return dao.findById(id); }
 
     @Transactional(readOnly = true)
-    public MedicoModel buscarPorCRM(Crm crm) {
-        return dao.findByCrm(crm);
-    }
+    public List<MedicoModel> buscarPorEspecialidade(String especialidade) { return dao.findByEspecialidade(especialidade); }
+
     @Transactional(readOnly = true)
     public List<MedicoModel> buscarTodos() {
         return dao.findAll();

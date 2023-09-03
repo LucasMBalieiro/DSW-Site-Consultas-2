@@ -1,15 +1,14 @@
 package dsw.trabalho.SistemaConsultasMedicas.Controllers;
 
-
-import dsw.trabalho.SistemaConsultasMedicas.Dtos.ConsultaRecordDto;
 import dsw.trabalho.SistemaConsultasMedicas.Dtos.MedicoRecordDto;
 import dsw.trabalho.SistemaConsultasMedicas.Dtos.PacienteRecordDto;
-import dsw.trabalho.SistemaConsultasMedicas.Models.Entities.ConsultaModel;
 import dsw.trabalho.SistemaConsultasMedicas.Models.Entities.MedicoModel;
 import dsw.trabalho.SistemaConsultasMedicas.Models.Entities.PacienteModel;
 import dsw.trabalho.SistemaConsultasMedicas.Repositories.ConsultaRepository;
 import dsw.trabalho.SistemaConsultasMedicas.Repositories.MedicoRepository;
 import dsw.trabalho.SistemaConsultasMedicas.Repositories.PacienteRepository;
+import dsw.trabalho.SistemaConsultasMedicas.Service.Spec.IMedicoService;
+import dsw.trabalho.SistemaConsultasMedicas.Service.Spec.IPacienteService;
 import jakarta.validation.Valid;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,10 +36,10 @@ public class AdminController {
     ConsultaRepository consultaRepository; //ponto de injecao
 
     @Autowired
-    MedicoRepository medicoRepository; //ponto de injecao
+    IMedicoService medico; //ponto de injecao
 
     @Autowired
-    PacienteRepository pacienteRepository; //ponto de injecao
+    IPacienteService paciente; //ponto de injecao
 
     private final PasswordEncoder encoder;
 
@@ -50,7 +49,7 @@ public class AdminController {
 
     @GetMapping("/listarPaciente")
     public String listarPaciente(ModelMap model){
-        model.addAttribute("paciente", pacienteRepository.findAll());
+        model.addAttribute("paciente", paciente.buscarTodos());
         return "admin/listaPaciente";
     }
     @GetMapping("/cadastrarPaciente")
@@ -64,17 +63,17 @@ public class AdminController {
             return "admin/cadastroPaciente";
         }
 
-        PacienteModel paciente = new PacienteModel();
-        BeanUtils.copyProperties(clienteRecordDto, paciente);
-        paciente.setSenha(encoder.encode(paciente.getSenha()));
-        pacienteRepository.save(paciente);
+        PacienteModel paciente0 = new PacienteModel();
+        BeanUtils.copyProperties(clienteRecordDto, paciente0);
+        paciente0.setSenha(encoder.encode(paciente0.getSenha()));
+        paciente.salvar(paciente0);
         attr.addFlashAttribute("sucess", "Cliente inserido com sucesso");
         return "redirect:/admin/listarPaciente";
     }
 
     @GetMapping("/editarPaciente/{id}")
     public String preeditarPaciente(@PathVariable("id") UUID id, ModelMap model){
-        model.addAttribute("paciente_id", pacienteRepository.findById(id));
+        model.addAttribute("paciente_id", paciente.buscarPorID(id));
         return "admin/cadastroPaciente";
     }
 
@@ -93,23 +92,23 @@ public class AdminController {
 
             return "admin/cadastroPaciente";
         }
-        PacienteModel paciente = new PacienteModel();
-        paciente.setSenha(encoder.encode(paciente.getSenha()));
-        pacienteRepository.save(paciente);
+        PacienteModel paciente0 = new PacienteModel();
+        paciente0.setSenha(encoder.encode(paciente0.getSenha()));
+        paciente.salvar(paciente0);
         attr.addFlashAttribute("sucess", "Cliente editado com sucesso.");
         return "redirect:/admin/listarPaciente";
     }
 
     @GetMapping("/excluirPaciente/{id}")
     public String excluirPacientePorId(@PathVariable("id") UUID id, RedirectAttributes attr) {
-        pacienteRepository.deleteById(id);
+        paciente.excluirPorID(id);
         attr.addFlashAttribute("sucess", "Locação excluída com sucesso.");
         return "redirect:/admin/listarPaciente";
     }
 
     @GetMapping("/listarMedico")
     public String listarMedico(ModelMap model){
-        model.addAttribute("medico", medicoRepository.findAll());
+        model.addAttribute("medico", medico.buscarTodos());
         return "admin/listaMedico";
     }
 
@@ -124,17 +123,17 @@ public class AdminController {
             return "admin/cadastroMedico";
         }
 
-        MedicoModel medico = new MedicoModel();
-        BeanUtils.copyProperties(medicoRecordDto, medico);
-        medico.setSenha(encoder.encode(medico.getSenha()));
+        MedicoModel medico0 = new MedicoModel();
+        BeanUtils.copyProperties(medicoRecordDto, medico0);
+        medico0.setSenha(encoder.encode(medico0.getSenha()));
         attr.addFlashAttribute("sucess", "Cliente inserido com sucesso");
-        medicoRepository.save(medico);
+        medico.salvar(medico0);
         return "redirect:/admin/listarMedico";
     }
 
     @GetMapping("/editarMedico/{id}")
     public String preeditarMedico(@PathVariable("id") UUID id, ModelMap model){
-        model.addAttribute("medico_id", medicoRepository.findById(id));
+        model.addAttribute("medico_id", medico.buscarMedicoPorID(id));
         return "admin/cadastroMedico";
     }
 
@@ -153,16 +152,16 @@ public class AdminController {
 
             return "admin/cadastroMedico";
         }
-        MedicoModel medico = new MedicoModel();
-        medico.setSenha(encoder.encode(medico.getSenha()));
-        medicoRepository.save(medico);
+        MedicoModel medico0 = new MedicoModel();
+        medico0.setSenha(encoder.encode(medico0.getSenha()));
+        medico.salvar(medico0);
         attr.addFlashAttribute("sucess", "Cliente editado com sucesso.");
         return "redirect:/admin/listarMedico";
     }
 
     @GetMapping("/excluirMedico/{id}")
     public String excluirMedicoPorId(@PathVariable("id") UUID id, RedirectAttributes attr) {
-        medicoRepository.deleteById(id);
+        medico.excluirPorID(id);
         attr.addFlashAttribute("sucess", "Locação excluída com sucesso.");
         return "redirect:/admin/listarmMedico";
     }
