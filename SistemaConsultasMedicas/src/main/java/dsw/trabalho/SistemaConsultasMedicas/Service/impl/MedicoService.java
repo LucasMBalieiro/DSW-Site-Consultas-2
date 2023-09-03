@@ -1,4 +1,4 @@
-package service.impl;
+package dsw.trabalho.SistemaConsultasMedicas.Service.impl;
 
 import dsw.trabalho.SistemaConsultasMedicas.Models.Entities.MedicoModel;
 import dsw.trabalho.SistemaConsultasMedicas.Models.ValueObjects.Crm;

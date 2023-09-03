@@ -44,6 +44,10 @@ public class UsuarioModel extends RepresentationModel<UsuarioModel> implements S
         this.papel = papel;
     }
 
+    public UsuarioModel() {
+
+    }
+
     public UUID getUserID() {
         return userID;
     }
