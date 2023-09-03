@@ -11,7 +11,7 @@ import java.io.Serial;
 import java.io.Serializable;
 import java.util.UUID;
 
-@Entity
+@MappedSuperclass
 @Table(name = "TB_USUARIOS")
 @Inheritance(strategy = InheritanceType.JOINED)
 public class UsuarioModel extends RepresentationModel<UsuarioModel> implements Serializable {

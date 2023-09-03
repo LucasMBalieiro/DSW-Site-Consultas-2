@@ -1,4 +1,4 @@
-package service.impl;
+package dsw.trabalho.SistemaConsultasMedicas.Service.impl;
 
 import dsw.trabalho.SistemaConsultasMedicas.Models.Entities.MedicoModel;
 import dsw.trabalho.SistemaConsultasMedicas.Models.ValueObjects.Crm;
@@ -21,19 +21,6 @@ public class MedicoService implements IMedicoService {
     @Autowired
     MedicoRepository dao;
 
-    @Autowired
-    ConsultaRepository consultaDao;
-
-    public void salvar(MedicoModel medico) {
-        dao.save(medico);
-    }
-
-    public void excluir(Crm crm) { dao.deleteByCrm(crm);}
-
-    public void excluirPorID(UUID id) {
-        dao.deleteById(id);
-    }
-
     @Transactional(readOnly = true)
     public List<String> buscarEspecialidades() { return dao.findEspecialidades(); }
 
@@ -49,5 +36,13 @@ public class MedicoService implements IMedicoService {
     @Transactional(readOnly = true)
     public List<MedicoModel> buscarTodos() {
         return dao.findAll();
+    }
+
+    public void salvar(MedicoModel medico) { dao.save(medico); }
+
+    public void excluirPorCrm(Crm crm) { dao.deleteByCrm(crm);}
+
+    public void excluirPorID(UUID id) {
+        dao.deleteById(id);
     }
 }

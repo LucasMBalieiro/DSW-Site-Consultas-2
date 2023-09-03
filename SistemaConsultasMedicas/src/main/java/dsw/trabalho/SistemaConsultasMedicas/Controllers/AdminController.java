@@ -2,13 +2,14 @@ package dsw.trabalho.SistemaConsultasMedicas.Controllers;
 
 import dsw.trabalho.SistemaConsultasMedicas.Dtos.MedicoRecordDto;
 import dsw.trabalho.SistemaConsultasMedicas.Dtos.PacienteRecordDto;
+
 import dsw.trabalho.SistemaConsultasMedicas.Models.Entities.MedicoModel;
 import dsw.trabalho.SistemaConsultasMedicas.Models.Entities.PacienteModel;
-import dsw.trabalho.SistemaConsultasMedicas.Repositories.ConsultaRepository;
-import dsw.trabalho.SistemaConsultasMedicas.Repositories.MedicoRepository;
-import dsw.trabalho.SistemaConsultasMedicas.Repositories.PacienteRepository;
+
+
 import dsw.trabalho.SistemaConsultasMedicas.Service.Spec.IMedicoService;
 import dsw.trabalho.SistemaConsultasMedicas.Service.Spec.IPacienteService;
+
 import jakarta.validation.Valid;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,11 +33,11 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 @RequestMapping("/admin")
 public class AdminController {
 
-    @Autowired
-    ConsultaRepository consultaRepository; //ponto de injecao
+//    @Autowired
+//    ConsultaRepository consultaRepository; //ponto de injecao
 
     @Autowired
-    IMedicoService medico; //ponto de injecao
+    IMedicoService medico;//ponto de injecao
 
     @Autowired
     IPacienteService paciente; //ponto de injecao

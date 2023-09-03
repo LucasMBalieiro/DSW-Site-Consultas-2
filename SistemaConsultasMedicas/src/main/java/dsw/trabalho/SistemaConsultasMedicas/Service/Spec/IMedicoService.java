@@ -9,24 +9,20 @@ import java.util.Optional;
 import java.util.UUID;
 
 public interface IMedicoService {
-    public void salvar(MedicoModel medico);
 
-    public void excluir(Crm id);
-
-    public void excluirPorID(UUID id);
-
-    @Transactional(readOnly = true)
     public List<String> buscarEspecialidades();
 
-    @Transactional(readOnly = true)
     public MedicoModel buscarMedicoPorCRM(Crm crm);
 
-    @Transactional(readOnly = true)
     public Optional<MedicoModel> buscarMedicoPorID(UUID id);
 
-    @Transactional(readOnly = true)
     public List<MedicoModel> buscarPorEspecialidade(String especialidade);
 
-    @Transactional(readOnly = true)
     public List<MedicoModel> buscarTodos();
+
+    public void salvar(MedicoModel medico);
+
+    public void excluirPorCrm(Crm id);
+
+    public void excluirPorID(UUID id);
 }

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  xmlns:th="http://www.thymeleaf.org"
+	  xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity"
+	  layout:decorate="~{layout}">
+<head>
+	<meta charset="UTF-8" />
+</head>
+<body>
+<section class="layout-content" layout:fragment="corpo">
+
+	<div class="container" style="text-align: center;">
+		<h1>
+			<span th:text="#{home.hello}"></span>
+		</h1>
+		<p><a th:href="@{/}"><span th:text="#{home.message}"></a></p>
+<!--		<img alt="" th:src="@{/image/bicicleta.png}" style="width:500px;">-->
+	</div>
+
+</section>
+</body>
+</html>

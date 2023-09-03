@@ -18,9 +18,7 @@ import java.util.UUID;
 @Entity
 @Table(name = "TB_PACIENTES")
 public class PacienteModel extends UsuarioModel {
-
-
-    @Id
+    //@Id
     @Column(name = "cpf",unique = true,nullable = false)
     @Convert(converter = CpfConverter.class)
     @NotNull Cpf cpf;

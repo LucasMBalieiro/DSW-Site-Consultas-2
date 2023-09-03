@@ -17,7 +17,7 @@ import java.util.UUID;
 @Table(name = "TB_MEDICOS")
 public class MedicoModel extends UsuarioModel {
 
-    @Id
+    //@Id
     @Column(name = "crm",unique = true,nullable = false)
     @Convert(converter = CrmConverter.class)
     @NotNull
