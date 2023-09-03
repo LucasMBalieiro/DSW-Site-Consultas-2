@@ -4,27 +4,23 @@ title.label=Consultas Médicas
 sidebar.link.home=Home
 sidebar.link.cadastrar=Cadastrar
 sidebar.link.listar=Listar
-sidebar.link.locadoras=Médicos disponíveis
-sidebar.titulo.locadora=Médicos
-sidebar.titulo.cliente=Pacientes
+sidebar.link.medicos=Médicos disponíveis
+sidebar.titulo.medico=Médicos
+sidebar.titulo.paciente=Pacientes
 sidebar.titulo.admin=Administradores
-sidebar.titulo.locacao=Consultas
+sidebar.titulo.consulta=Consultas
 sidebar.titulo.explorar=Explorar
-sidebar.link.cadastrar.locacoes=Agendar uma consulta
+sidebar.link.cadastrar.consultas=Agendar uma consulta
+
 # Titulos Medico
-locadora.cadastrar.label=Cadastrar Medico
-locadora.listar.label=Listar Médicos
-locadora.name.label=Nome
-locadora.cnpj.label=CNPJ
-locadora.email.label=E-mail
-locadora.city.label=Cidade
-locadora.username.label=Nome de usuário
-locadora.password.label=Senha
-# Titulos Editora
-editora.cadastrar.label=Cadastrar Editora
-editora.listar.label=Listar Editoras
-editora.nome.label=Nome
-editora.cnpj.label=CNPJ
+medico.cadastrar.label=Cadastrar Medico
+medico.listar.label=Listar Médicos
+medico.name.label=Nome
+medico.crm.label=CRM
+medico.email.label=E-mail
+medico.especialidade.label=Especialidade
+medico.password.label=Senha
+
 # Titulos Usuario
 usuario.cadastrar.label=Cadastrar Usuário
 usuario.listar.label=Listar Usuários
@@ -33,17 +29,20 @@ usuario.password.label=Senha
 usuario.name.label=Nome
 usuario.CPF.label=CPF
 usuario.role.label=Papel
-# Titulos Locação
-locacao.cadastrar.label=Fazer uma locação
-locacao.listar.label=Listar Locações
-locacao.lista.label=Lista de Locações
-locacao.data.label=Data
-locacao.hora.label=Hora
-locacao.locadora.label=Locadora
-locacao.client.label=Cliente
+
+# Titulos consulta
+consulta.cadastrar.label=Fazer uma consulta
+consulta.listar.label=Listar consultas
+consulta.lista.label=Lista de consultas
+consulta.data.label=Data
+consulta.hora.label=Hora
+consulta.medico.label=medico
+consulta.client.label=paciente
+
 # Mensagens Remoção
 remove.label.warning=Atenção
 remove.label.message=Clique em OK para proceder com a exclusão...
+
 # Mensagens Botões & Caixas de Seleção
 link.excluir.label=Excluir
 link.editar.label=Editar
@@ -51,6 +50,7 @@ button.cancelar.label=Cancelar
 button.salvar.label=Salvar
 select.label=Selecione...
 acao.label=Ação
+
 # Mensagens de erro
 error.page.title=Página de Erros
 previous.message=Voltar a página anterior
@@ -60,19 +60,21 @@ previous.message=Voltar a página anterior
 404.message=A url para a página não existe.
 default.error=Ocorreu um erro interno no servidor.
 default.message=Ocorreu um erro inesperado, tente mais tarde.
+
 # Mensagens (Flash Attributes)
-locadora.create.sucess=Locadora criada com sucesso.
-locadora.edit.sucess=Locadora editada com sucesso.
-locadora.delete.sucess=Locadora excluída com sucesso.
-locadora.delete.fail=Locadora não excluída. Possui livro(s) vinculado(s).
-locacao.create.sucess=Locação criada com sucesso.
-locacao.edit.sucess=Locação editada com sucesso.
-locacao.delete.sucess=Locação excluída com sucesso.
-locacao.delete.fail=Locação não excluída.
+medico.create.sucess=medico criada com sucesso.
+medico.edit.sucess=medico editada com sucesso.
+medico.delete.sucess=medico excluída com sucesso.
+medico.delete.fail=medico não excluída. Possui livro(s) vinculado(s).
+consulta.create.sucess=consulta criada com sucesso.
+consulta.edit.sucess=consulta editada com sucesso.
+consulta.delete.sucess=consulta excluída com sucesso.
+consulta.delete.fail=consulta não excluída.
 usuario.create.sucess=Usuário criado com sucesso.
 usuario.edit.sucess=Usuário editado com sucesso.
 usuario.delete.sucess=Usuário excluído com sucesso.
-# Mensagens Login
+
+
 # Mensagens Admin
 admin.cadastrar.label=Cadastro
 admin.name.label=Nome
@@ -83,6 +85,7 @@ admin.listar.label=Listar
 admin.create.sucess=Admin criado com sucesso.
 admin.edit.sucess=Admin editado com sucesso.
 admin.delete.sucess=Admin excluído com sucesso.
+
 # Login messages
 login.message=Entre
 login.username=Login
@@ -91,32 +94,33 @@ login.password=Senha
 login.button=Entrar
 login.error=Nome de usuário ou senha inválida.
 login.services.title=Explore nossos serviços
-login.services.locadoras=Conheça as locadoras
+login.services.medicos=Conheça as medicos
 user.role=Papel
+
 # Explorar
-explore.locadoras.title=Locadoras de bicicletas
-explore.locadoras.paragraph=Faça uma locação totalmente online de uma bicicleta em uma de nossas locadoras. Aqui estão todas as empresas que fornecem bicletas perfeitas para você.
-explore.locadoras.filter.label=Filtrar por cidade
-explore.locadoras.filter.button=Filtrar
-explore.locadoras.filter.title=Encontre locadoras perto de você
-explore.locadoras.filter.placeholder=Digite uma cidade...
-explore.locadoras.list.title=Nossas locadoras
-explore.locadoras.filter.clearbutton=Limpar filtro
-explore.locadoras.list.empty=Não encontramos locadoras.
-explore.locadoras.list.filter.title=Locadoras situadas em
-explore.locadoras.filter.option=Selecione uma cidade...
-#Mensagens Clientes
-cliente.cadastrar.label=Cadastrar Clientes
-cliente.listar.label=Listar Clientes
-cliente.name.label=Nome Completo
-cliente.username.label=Usuário
-cliente.password.label=Senha
-cliente.email.label=E-mail
-cliente.cpf.label=CPF
-cliente.telefone.label=Telefone
-cliente.sexo.label=Gênero
-cliente.birthDate.label=Data de Nascimento
-cliente.create.success=Cliente criado com sucesso.
-cliente.edit.sucess=Cliente editado com sucesso.
-cliente.delete.sucess=Cliente excluído com sucesso.
-cliente.delete.fail=Cliente não excluído. Possui locações vinculadas.
+explore.medicos.title=medicos de bicicletas
+explore.medicos.paragraph=Faça uma consulta totalmente online de uma bicicleta em uma de nossas medicos. Aqui estão todas as empresas que fornecem bicletas perfeitas para você.
+explore.medicos.filter.label=Filtrar por cidade
+explore.medicos.filter.button=Filtrar
+explore.medicos.filter.title=Encontre medicos perto de você
+explore.medicos.filter.placeholder=Digite uma cidade...
+explore.medicos.list.title=Nossas medicos
+explore.medicos.filter.clearbutton=Limpar filtro
+explore.medicos.list.empty=Não encontramos medicos.
+explore.medicos.list.filter.title=medicos situadas em
+explore.medicos.filter.option=Selecione uma cidade...
+
+#Mensagens pacientes
+paciente.cadastrar.label=Cadastrar pacientes
+paciente.listar.label=Listar pacientes
+paciente.name.label=Nome Completo
+paciente.password.label=Senha
+paciente.email.label=E-mail
+paciente.cpf.label=CPF
+paciente.telefone.label=Telefone
+paciente.sexo.label=Gênero
+paciente.birthDate.label=Data de Nascimento
+paciente.create.success=paciente criado com sucesso.
+paciente.edit.sucess=paciente editado com sucesso.
+paciente.delete.sucess=paciente excluído com sucesso.
+paciente.delete.fail=paciente não excluído. Possui consultas vinculadas.
