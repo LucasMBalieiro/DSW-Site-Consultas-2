@@ -1,5 +1,8 @@
 package dsw.trabalho.SistemaConsultasMedicas.Config;
 
+import dsw.trabalho.SistemaConsultasMedicas.Models.ValueObjects.Email;
+import dsw.trabalho.SistemaConsultasMedicas.Repositories.UsuarioRepository;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.databind.module.SimpleModule;
@@ -12,6 +15,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.format.FormatterRegistry;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Slf4j
