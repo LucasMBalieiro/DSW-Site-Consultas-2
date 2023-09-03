@@ -32,13 +32,14 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 public class MedicoController {
 
     @Autowired
-    IMedicoService medico;//ponto de injecaom
+    IMedicoService medico;
     @Autowired
     IConsultaService consulta;
 
     private final PasswordEncoder encoder;
 
-    private UUID idMedico; //temporaria, pra não dar erro
+    //todo ver qual metodo usar
+    private UUID idMedico;
 
     public MedicoController(PasswordEncoder encoder, MedicoRepository medicoRepository) { this.encoder = encoder; }
 
@@ -47,4 +48,14 @@ public class MedicoController {
         model.addAttribute("paciente", consulta.buscarPorMedico(idMedico));
         return "medico/lista";
     }
+
+    @GetMapping("/listarConsultas/{id}")
+    public String listaConsultas(ModelMap model, @PathVariable("id") UUID id){
+        model.addAttribute("consulta", consulta.buscarPorMedico(id));
+        return "medico/lista";
+    }
+
+
+
+
 }
