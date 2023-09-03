@@ -7,6 +7,9 @@ import dsw.trabalho.SistemaConsultasMedicas.Models.Entities.MedicoModel;
 import dsw.trabalho.SistemaConsultasMedicas.Models.ValueObjects.Crm;
 import dsw.trabalho.SistemaConsultasMedicas.Repositories.ConsultaRepository;
 import dsw.trabalho.SistemaConsultasMedicas.Repositories.MedicoRepository;
+import dsw.trabalho.SistemaConsultasMedicas.Service.Spec.IConsultaService;
+import dsw.trabalho.SistemaConsultasMedicas.Service.Spec.IMedicoService;
+import dsw.trabalho.SistemaConsultasMedicas.Service.impl.ConsultaService;
 import jakarta.validation.Valid;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +17,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -24,89 +28,23 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @Controller
+@RequestMapping(path = "/medico")
 public class MedicoController {
 
     @Autowired
-    MedicoRepository medicoRepository;//ponto de injecaom
+    IMedicoService medico;//ponto de injecaom
     @Autowired
-    ConsultaRepository consultaRepository;
+    IConsultaService consulta;
 
     private final PasswordEncoder encoder;
 
-    public MedicoController(PasswordEncoder encoder, MedicoRepository medicoRepository) {
-        this.encoder = encoder;
-        this.medicoRepository = medicoRepository;
+    private UUID idMedico; //temporaria, pra não dar erro
+
+    public MedicoController(PasswordEncoder encoder, MedicoRepository medicoRepository) { this.encoder = encoder; }
+
+    @GetMapping("/listarConsultas")
+    public String listarConsultas(ModelMap model){
+        model.addAttribute("paciente", consulta.buscarPorMedico(idMedico));
+        return "medico/lista";
     }
-
-    @PostMapping("/profissionais") //create
-    public ResponseEntity<MedicoModel> saveMedico(@RequestBody  @Valid MedicoRecordDto medicoRecordDto){
-        var medicoModel = new MedicoModel();
-        BeanUtils.copyProperties(medicoRecordDto,medicoModel);
-        medicoModel.setSenha(encoder.encode(medicoModel.getSenha()));
-        return ResponseEntity.status(HttpStatus.CREATED).body(medicoRepository.save(medicoModel));//uso do http 201
-    }
-
-    @GetMapping("/profissionais")
-    public ResponseEntity<List<MedicoModel>> getAllMedicos(){
-        //List<MedicoModel> medicoModelList = medicoRepository.findAll();
-        return ResponseEntity.status(HttpStatus.OK).body(medicoRepository.findAll());
-    }
-
-    @GetMapping("/profissionais/{id}")
-    public ResponseEntity<Object> getOneMedico(@PathVariable(value= "crm") Crm id){
-
-        Optional<MedicoModel> medico0 = Optional.ofNullable(medicoRepository.findByCrm(id));
-        if(medico0.isEmpty()){
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Medico nao encontrado.");//todo criar mensagem
-        }
-        medico0.get().add(linkTo(methodOn(MedicoController.class).getAllMedicos()).withRel("Medicos List"));
-        return ResponseEntity.status(HttpStatus.OK).body(medico0.get());
-    }
-
-    @GetMapping("/profissionais/nome/{nome}")
-    public ResponseEntity<Object> getMedicoByEspecialidade(@PathVariable(value= "nome") String nome){
-        List<MedicoModel> medicoModelList = medicoRepository.findByNome(nome);
-        //pra cada produto, obtem o id, .add pra construir link, basicamente usa o getOneMedico
-        for(MedicoModel medico : medicoModelList){
-            Crm id = medico.getCrm();
-            medico.add(linkTo(methodOn(MedicoController.class).getOneMedico(id)).withSelfRel());
-        }
-        return ResponseEntity.status(HttpStatus.OK).body(medicoModelList);
-    }
-
-    @GetMapping("/profissionais/crm/{crm}")
-    public ResponseEntity<Object> getMedicoByCrm(@PathVariable(value= "crm") Crm crm){
-        MedicoModel medicoModel = medicoRepository.findByCrm(crm);
-        Crm id = medicoModel.getCrm();
-        medicoModel.add(linkTo(methodOn(MedicoController.class).getOneMedico(id)).withSelfRel());
-
-        return ResponseEntity.status(HttpStatus.OK).body(medicoModel);
-    }
-
-
-    @PutMapping("/profissionais/{id}")//upddating
-    public ResponseEntity<Object> updateMedico(@PathVariable(value= "id") UUID id, @RequestBody @Valid MedicoRecordDto medicoRecordDto) {
-
-        Optional<MedicoModel> medico0 = medicoRepository.findById(id);
-        if (medico0.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Medico nao encontrado.");//todo criar mensagem
-        }
-        var medicoModel = medico0.get();//pega o antigfo
-        BeanUtils.copyProperties(medicoRecordDto, medicoModel);//converte pro novo
-        return ResponseEntity.status(HttpStatus.OK).body(medicoRepository.save(medicoModel));//salva
-    }
-
-    @DeleteMapping("/profissionais/{id}")//deleting
-    public ResponseEntity<Object> deleteMedico(@PathVariable(value= "id") UUID id) {
-
-        Optional<MedicoModel> medico0 = medicoRepository.findById(id);
-        if (medico0.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Medico nao encontrado.");//todo criar mensagem
-        }
-        medicoRepository.delete(medico0.get());
-        return ResponseEntity.status(HttpStatus.OK).body("Deletado corretamente");//salva
-    }
-
-
-
 }

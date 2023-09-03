@@ -8,6 +8,7 @@ html, body {
 body {
     padding-top: 56px;
     padding-left: 0;
+    font-family: Arial, sans-serif; /* Specify your desired font */
 }
 
 /*
@@ -15,7 +16,7 @@ body {
  */
 .layout-main {
     display: flex;
-    min-height: calc(80vh - 52px);
+    min-height: calc(100vh - 56px); /* Adjusted for the header height */
     overflow: hidden;
 }
 
@@ -24,7 +25,7 @@ body {
  */
 .layout-content {
     width: 100%;
-    padding-top: 0px;
+    padding: 20px; /* Added padding for content */
 }
 
 .container {
@@ -36,18 +37,19 @@ body {
  * Sidebar
  */
 .sidebar {
-    width: 0px;
-    height: 80vh;
+    width: 250px; /* Adjusted sidebar width */
+    height: 100%;
     border-top: 1px solid #eee;
     border-right: 1px solid #eee;
-    background-color: #f8f9fa;
+    background-color: #3498db; /* Updated sidebar background color */
+    color: #fff; /* Updated sidebar text color */
     flex-shrink: 0;
     overflow: hidden;
     transition: width .5s;
 }
 
 .sidebar .nav {
-    margin-bottom: 0px;
+    margin-bottom: 0;
 }
 
 .sidebar .nav-item {
@@ -63,7 +65,7 @@ body {
 }
 
 .sidebar ul li:hover a, .menu ul li.active a{
-    color: #777777;
+    color: #ffffff; /* Updated hover and active link color */
 }
 
 .sidebar ul{
@@ -73,7 +75,7 @@ body {
 
 .sidebar ul li a{
     display: block;
-    color:#1a1a1a;
+    color: #ffffff; /* Updated sidebar link text color */
     padding: 10px 15px;
     white-space: nowrap;
 }
@@ -91,12 +93,12 @@ body {
 }
 
 /*
- * toogle do navbar do menu
+ * Navbar Toggle Button
  */
-
 .navbar-toggle {
     display: inline-block;
     margin-left: 10px;
+    color: #fff; /* Updated toggle button color */
 }
 
 /*
@@ -110,11 +112,12 @@ body {
     margin: 0;
     height: 50px;
     border-top: 1px solid #eeeeee;
+    background-color: #333; /* Updated footer background color */
+    color: #fff; /* Updated footer text color */
 }
 
 .footer-copy {
     font-size: 92%;
     display: block;
-    color: #777777;
     text-align: center;
 }
