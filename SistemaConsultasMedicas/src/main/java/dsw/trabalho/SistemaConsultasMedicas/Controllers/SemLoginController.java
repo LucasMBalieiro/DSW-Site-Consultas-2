@@ -8,14 +8,5 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/")
 public class SemLoginController {
 
-    @GetMapping("/listarMedicos")
-    public String listarMedicos()
-    {
-
-    }
-
-    @GetMapping("/ListarMedicosEspecialidade")
-
-    @GetMapping("/Login")
 
 }

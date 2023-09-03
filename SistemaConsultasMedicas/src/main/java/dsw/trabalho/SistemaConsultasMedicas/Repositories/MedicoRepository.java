@@ -24,6 +24,5 @@ public interface MedicoRepository extends JpaRepository<MedicoModel, UUID> {
     public MedicoModel findByCrm(@Param("crm") Crm crm);
 
 
-
-
+    void deleteByCrm(Crm id);
 }

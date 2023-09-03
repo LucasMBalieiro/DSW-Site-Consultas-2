@@ -24,7 +24,6 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @Controller
-@RequestMapping("/medicos")
 public class MedicoController {
 
     @Autowired
@@ -39,18 +38,6 @@ public class MedicoController {
         this.medicoRepository = medicoRepository;
     }
 
-    @GetMapping("/listarConsultas")
-    public List<ConsultaModel> ListarConsultas(@RequestBody  @Valid MedicoRecordDto medicoRecordDto)
-    {
-        List<ConsultaModel> ConsultasDoMedico;
-        ConsultasDoMedico =consultaRepository.findByMedico(medicoRecordDto.crm());
-
-        return ConsultasDoMedico;
-    }
-
-
-
-    /*
     @PostMapping("/profissionais") //create
     public ResponseEntity<MedicoModel> saveMedico(@RequestBody  @Valid MedicoRecordDto medicoRecordDto){
         var medicoModel = new MedicoModel();
@@ -66,9 +53,9 @@ public class MedicoController {
     }
 
     @GetMapping("/profissionais/{id}")
-    public ResponseEntity<Object> getOneMedico(@PathVariable(value= "id") UUID id){
+    public ResponseEntity<Object> getOneMedico(@PathVariable(value= "crm") Crm id){
 
-        Optional<MedicoModel> medico0 = medicoRepository.findById(id);
+        Optional<MedicoModel> medico0 = Optional.ofNullable(medicoRepository.findByCrm(id));
         if(medico0.isEmpty()){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Medico nao encontrado.");//todo criar mensagem
         }
@@ -81,7 +68,7 @@ public class MedicoController {
         List<MedicoModel> medicoModelList = medicoRepository.findByNome(nome);
         //pra cada produto, obtem o id, .add pra construir link, basicamente usa o getOneMedico
         for(MedicoModel medico : medicoModelList){
-            UUID id = medico.getIdMedico();
+            Crm id = medico.getCrm();
             medico.add(linkTo(methodOn(MedicoController.class).getOneMedico(id)).withSelfRel());
         }
         return ResponseEntity.status(HttpStatus.OK).body(medicoModelList);
@@ -90,7 +77,7 @@ public class MedicoController {
     @GetMapping("/profissionais/crm/{crm}")
     public ResponseEntity<Object> getMedicoByCrm(@PathVariable(value= "crm") Crm crm){
         MedicoModel medicoModel = medicoRepository.findByCrm(crm);
-        UUID id = medicoModel.getIdMedico();
+        Crm id = medicoModel.getCrm();
         medicoModel.add(linkTo(methodOn(MedicoController.class).getOneMedico(id)).withSelfRel());
 
         return ResponseEntity.status(HttpStatus.OK).body(medicoModel);
@@ -118,7 +105,7 @@ public class MedicoController {
         }
         medicoRepository.delete(medico0.get());
         return ResponseEntity.status(HttpStatus.OK).body("Deletado corretamente");//salva
-    }*/
+    }
 
 
 
