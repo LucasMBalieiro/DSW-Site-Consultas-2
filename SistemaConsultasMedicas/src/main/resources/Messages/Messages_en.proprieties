@@ -1,0 +1,130 @@
+Certainly! Here are the translations for the parts after the '=' in the Java messages:
+
+# Header Titles
+title.label=Consultas Médicas -> title.label=Medical Appointments
+
+# Sidebar Titles
+sidebar.link.home=Home
+sidebar.link.cadastrar=Register
+sidebar.link.listar=List
+sidebar.link.medicos=Available Doctors
+sidebar.titulo.medico=Doctors
+sidebar.titulo.paciente=Patients
+sidebar.titulo.admin=Administrators
+sidebar.titulo.consulta=Appointments
+sidebar.titulo.explorar=Explore
+sidebar.link.cadastrar.consultas=Schedule an Appointment
+
+# Doctor Titles
+medico.cadastrar.label=Register Doctor
+medico.listar.label=List Doctors
+medico.name.label=Name
+medico.crm.label=CRM
+medico.email.label=Email
+medico.especialidade.label=Specialty
+medico.password.label=Password
+
+# User Titles
+usuario.cadastrar.label=Register User
+usuario.listar.label=List Users
+usuario.username.label=Username
+usuario.password.label=Password
+usuario.name.label=Name
+usuario.CPF.label=CPF
+usuario.role.label=Role
+
+# Appointment Titles
+consulta.cadastrar.label=Schedule an Appointment
+consulta.listar.label=List Appointments
+consulta.lista.label=Appointment List
+consulta.data.label=Date
+consulta.hora.label=Time
+consulta.medico.label=Doctor
+consulta.client.label=Patient
+
+# Removal Messages
+remove.label.warning=Warning
+remove.label.message=Click OK to proceed with the deletion...
+
+# Button & Checkbox Messages
+link.excluir.label=Delete
+link.editar.label=Edit
+button.cancelar.label=Cancel
+button.salvar.label=Save
+select.label=Select...
+acao.label=Action
+
+# Error Messages
+error.page.title=Error Page
+previous.message=Go back to the previous page
+403.error=Unauthorized Page.
+403.message=Unauthorized page for the logged-in user.
+404.error=Page not found.
+404.message=The URL for the page doesn't exist.
+default.error=An internal server error occurred.
+default.message=An unexpected error occurred, please try again later.
+
+# Flash Attributes Messages
+medico.create.sucess=Doctor created successfully.
+medico.edit.sucess=Doctor edited successfully.
+medico.delete.sucess=Doctor deleted successfully.
+medico.delete.fail=Doctor not deleted. It has associated book(s).
+consulta.create.sucess=Appointment created successfully.
+consulta.edit.sucess=Appointment edited successfully.
+consulta.delete.sucess=Appointment deleted successfully.
+consulta.delete.fail=Appointment not deleted.
+usuario.create.sucess=User created successfully.
+usuario.edit.sucess=User edited successfully.
+usuario.delete.sucess=User deleted successfully.
+
+# Admin Messages
+admin.cadastrar.label=Registration
+admin.name.label=Name
+admin.username.label=User
+admin.password.label=Password
+admin.email.label=Email
+admin.listar.label=List
+admin.create.sucess=Admin created successfully.
+admin.edit.sucess=Admin edited successfully.
+admin.delete.sucess=Admin deleted successfully.
+
+# Login Messages
+login.message=Log In
+login.username=Username
+login.username.label=User or Email..
+login.password=Password
+login.button=Login
+login.error=Invalid username or password.
+login.services.title=Explore Our Services
+login.services.medicos=Meet the Doctors
+user.role=Role
+
+# Explore
+explore.medicos.title=Bicycle Doctors
+explore.medicos.paragraph=Schedule a bike consultation entirely online with one of our doctors. Here are all the companies that provide perfect bikes for you.
+explore.medicos.filter.label
+
+=Filter by City
+explore.medicos.filter.button=Filter
+explore.medicos.filter.title=Find Doctors Near You
+explore.medicos.filter.placeholder=Enter a city...
+explore.medicos.list.title=Our Doctors
+explore.medicos.filter.clearbutton=Clear filter
+explore.medicos.list.empty=No doctors found.
+explore.medicos.list.filter.title=Doctors located in
+explore.medicos.filter.option=Select a city...
+
+# Patient Messages
+paciente.cadastrar.label=Register Patients
+paciente.listar.label=List Patients
+paciente.name.label=Full Name
+paciente.password.label=Password
+paciente.email.label=Email
+paciente.cpf.label=CPF
+paciente.telefone.label=Phone
+paciente.sexo.label=Gender
+paciente.birthDate.label=Date of Birth
+paciente.create.success=Patient created successfully.
+paciente.edit.sucess=Patient edited successfully.
+paciente.delete.sucess=Patient deleted successfully.
+paciente.delete.fail=Patient not deleted. It has associated appointments.
