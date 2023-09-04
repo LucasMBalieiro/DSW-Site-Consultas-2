@@ -25,11 +25,6 @@ public class SistemaConsultasMedicasApplication {
 		SpringApplication.run(SistemaConsultasMedicasApplication.class, args);
 	}
 
-	@Bean
-	public PasswordEncoder getPasswordEncoder() {
-		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-		return encoder;
-	}
 
 	@Bean
 	public CommandLineRunner demo(UsuarioRepository usuarioRepository, MedicoRepository medicoRepository, PacienteRepository pacienteRepository, BCryptPasswordEncoder encoder){
@@ -91,7 +86,7 @@ public class SistemaConsultasMedicasApplication {
 
 			UsuarioModel u1 = new UsuarioModel("admin");
 			u1.setNome("Ademir");
-			u1.setEmail("admin@gmail.com");
+			u1.setEmail(new Email("admin@gmail.com"));
 			u1.setSenha(encoder.encode("senhaadmin"));
 			
 			usuarioRepository.save(u1);
