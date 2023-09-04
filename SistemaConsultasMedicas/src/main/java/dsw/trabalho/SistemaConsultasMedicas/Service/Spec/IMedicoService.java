@@ -28,4 +28,6 @@ public interface IMedicoService {
     public void excluirPorID(UUID id);
 
     public UUID getIdByEmail(Email email);
+    
+    public List<String> buscarTodasEspecialidades();
 }

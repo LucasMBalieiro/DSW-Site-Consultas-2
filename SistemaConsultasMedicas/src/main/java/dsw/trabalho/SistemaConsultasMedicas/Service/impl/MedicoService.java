@@ -49,4 +49,8 @@ public class MedicoService implements IMedicoService {
     public void excluirPorID(UUID id) {
         dao.deleteById(id);
     }
+
+    public List<String> buscarTodasEspecialidades(){
+        return dao.findEspecialidades();
+    }
 }
