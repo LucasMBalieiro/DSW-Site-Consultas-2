@@ -45,12 +45,12 @@
                     <td th:text="${consulta.getDataConsulta()}"></td>
                     <td th:text="${consulta.getHorarioConsulta()}"></td>
                     <td sec:authorize="hasRole('paciente')" colspan="2">
-                        <a class="btn btn-info btn-sm" th:href="@{/paciente/editarConsulta/{id} (id=${consulta.idConsulta}) }"
+                        <a class="btn btn-info btn-sm" th:href="@{/paciente/cadastroConsulta/{id} (id=${consulta.idConsulta.toString()}) }"
                            role="button">
                             <span class="oi oi-brush" th:title="#{link.editar.label}" aria-hidden="true"> </span>
                         </a>
                         <button
-                                th:id="${'paciente/excluirConsulta/' + consulta.id}"
+                                th:id="${'paciente/excluirConsulta/' + consulta.idConsulta.toString()}"
                                 type="button" class="btn btn-danger btn-sm"
                                 data-toggle="modal" data-target="#myModal">
                             <span class="oi oi-circle-x" th:title="#{link.excluir.label}" aria-hidden="true"></span>
