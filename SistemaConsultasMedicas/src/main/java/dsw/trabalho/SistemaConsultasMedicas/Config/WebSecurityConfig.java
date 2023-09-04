@@ -41,9 +41,10 @@ public class WebSecurityConfig{
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests((authz) -> authz
-                        .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll() // Allow access to common static resources without authentication
-                        .requestMatchers("/home").permitAll() // Allow access to /home without authentication
-                        .requestMatchers("/admin/**").hasRole("admin") // Require "admin" role for /admin pages
+                        .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
+                        .requestMatchers("/home").permitAll() // acho que nao precisa, mas deixar de precaucao
+                        .requestMatchers("/login").permitAll() //tmb acho que nao precisa
+                        .requestMatchers("/admin/**").hasRole("admin")
                         .requestMatchers("/medico/**").hasRole("medico")
                         .requestMatchers("/paciente/**").hasRole("paciente")
                         .anyRequest().authenticated()
