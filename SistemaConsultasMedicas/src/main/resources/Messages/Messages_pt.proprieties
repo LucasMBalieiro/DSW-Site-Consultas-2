@@ -3,40 +3,26 @@ title.label=Consultas Médicas
 title.content.label = Conteudo principal das paginas
 
 # Titulos do Sidebar
-sidebar.link.home = Pagina inicial
+sidebar.link.home=Home
 sidebar.link.cadastrar=Cadastrar
 sidebar.link.listar=Listar
-sidebar.link.medicos=Medicos disponiveis
-sidebar.titulo.medico=Medicos
-sidebar.link.listarConsultas = Listar consultas
+sidebar.link.medicos=Médicos disponíveis
+sidebar.titulo.medico=Médicos
 sidebar.titulo.paciente=Pacientes
-sidebar.link.cadastrarConsultas = Cadastrar consulta
 sidebar.titulo.admin=Administradores
 sidebar.titulo.consulta=Consultas
 sidebar.titulo.explorar=Explorar
 sidebar.link.cadastrar.consultas=Agendar uma consulta
-sidebar.titulo.Equipe = Equipe
-sidebar.link.verMedicos = Medicos
-sidebar.titulo.compra = OQUEISSOFAZ
-sidebar.link.listarMedico = Lista medicos
-sidebar.link.listarPaciente = Lista pacientes
 
 home.hello = Bem vindo ao site de consultas medicas
 home.message = Marque consultas!
 
 # Titulos Medico
 medico.cadastrar.label=Cadastrar Medico
-medicos.listar.label = Listar medicos
-medico.listar.label=Listar medicos
-medico.nova.label = Novo medico
+medico.listar.label=Listar Médicos
 medico.name.label=Nome
 medico.crm.label=CRM
-crm.label=CRM
 medico.email.label=E-mail
-email.label=E-mail
-filtro.label = Filtro
-medico.especialidade=Especialidade
-especialidade=Especialidade
 medico.especialidade.label=Especialidade
 medico.password.label=Senha
 medico.lista.label = Lista de Medicos
@@ -61,15 +47,8 @@ consulta.listar.label=Listar consultas
 consulta.lista.label=Lista de consultas
 consulta.data.label=Data
 consulta.hora.label=Hora
-consulta.medico.label= Medico
-consulta.client.label= Paciente
-consulta.horario.label = Horario
-consulta.horario = Horario
-consulta.paciente.nome = Nome
-consulta.paciente.telefone = Telefone
-consulta.paciente.sexo = Sexo
-consulta.paciente.dataNasc = Data Nascimento
-consulta.botao.voltar.label = Voltar
+consulta.medico.label=medico
+consulta.client.label=paciente
 
 horario.label = Horario
 
@@ -81,7 +60,6 @@ remove.label.message=Clique em OK para proceder com a exclusão...
 link.excluir.label=Excluir
 link.editar.label=Editar
 button.cancelar.label=Cancelar
-link.adicionar.label = Adicionar
 button.salvar.label=Salvar
 select.label=Selecione...
 acao.label=Ação
@@ -133,7 +111,6 @@ login.services.title=Explore nossos serviços
 login.services.medicos=Conheça as medicos
 login.listagem = Listagem de medicos
 user.role=Papel
-login.text = Login
 
 # Explorar
 explore.medicos.title=medicos de bicicletas
@@ -151,7 +128,6 @@ explore.medicos.filter.option=Selecione uma cidade...
 #Mensagens pacientes
 paciente.cadastrar.label=Cadastrar pacientes
 paciente.listar.label=Listar pacientes
-paciente.nova.label = Novo paciente
 paciente.name.label=Nome Completo
 paciente.password.label=Senha
 paciente.email.label=E-mail

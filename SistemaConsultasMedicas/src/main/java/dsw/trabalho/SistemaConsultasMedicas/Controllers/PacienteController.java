@@ -48,23 +48,16 @@ public class PacienteController {
     }
 
     @GetMapping("/listarMedicos")
-    public String listaMedicos(@RequestParam(value = "especialidade", required = false) String especialidade, ModelMap model){
-
-        if (especialidade != null && !especialidade.isEmpty()) {
-            model.addAttribute("medicos", medico.buscarPorEspecialidade(especialidade));
-        } else {
-            model.addAttribute("medicos", medico.buscarTodos());
-        }
-        model.addAttribute("especialidade", medico.buscarTodasEspecialidades());
-
+    public String listaMedicos(ModelMap model){
+        model.addAttribute("medico", medico.buscarTodos());
         return "paciente/listaMedicos";
     }
 
-//    @GetMapping("/listarMedicos/{especialidade}")
-//    public String listaMedicosEspecialidade(ModelMap model, @PathVariable("especialidade") String especialidade){
-//        model.addAttribute("medico", medico.buscarPorEspecialidade(especialidade));
-//        return "paciente/listaMedicos";
-//    }
+    @GetMapping("/listarMedicos/{especialidade}")
+    public String listaMedicosEspecialidade(ModelMap model, @PathVariable("especialidade") String especialidade){
+        model.addAttribute("medico", medico.buscarPorEspecialidade(especialidade));
+        return "paciente/listaMedicos";
+    }
 
     @GetMapping("/listarConsultas")
     public String listarConsultas(ModelMap model){
@@ -75,8 +68,8 @@ public class PacienteController {
         }
 
         UUID idPaciente = paciente.getIdByEmail(email);
-        model.addAttribute("consultas", consulta.buscarPorPaciente(idPaciente));
-        return "paciente/listaConsultas";
+        model.addAttribute("consultas", consulta.buscarPorMedico(idPaciente));
+        return "medico/lista";
     }
 
     @GetMapping("/cadastrarConsulta")

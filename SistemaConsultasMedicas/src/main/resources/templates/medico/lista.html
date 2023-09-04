@@ -70,8 +70,7 @@
                     <th th:text="#{consulta.paciente.telefone}">Contato</th>
                     <th th:text="#{consulta.paciente.sexo}">Sexo</th>
                     <th th:text="#{consulta.paciente.dataNasc}">Data de Nascimento</th>
-                    <th th:text="#{consulta.data.label}">Data</th>
-                    <th th:text="#{consulta.horario.label}">Horario</th>
+                    <th th:text="#{consulta.horario}">Especialidade</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -80,7 +79,6 @@
                     <td th:text="${consulta.paciente.getTelefone()}"></td>
                     <td th:text="${consulta.paciente.getSexo()}"></td>
                     <td th:text="${consulta.paciente.getDataNascimento()}"></td>
-                    <td th:text="${consulta.getDataConsulta()}"></td>
                     <td th:text="${consulta.getHorarioConsulta()}"></td>
                 </tr>
                 </tbody>
