@@ -39,24 +39,28 @@ public class UsuarioDetailsServiceImpl implements UserDetailsService {
         AdminModel admin0 = adminRepository.findByEmail(username);
 
         if(medico0 != null){
+            System.out.println("Login como médico");
             usuario0.setEmail(medico0.getEmail());
             usuario0.setSenha(medico0.getSenha());
             usuario0.setNome(medico0.getNome());
             usuario0.setPapel("medico");
         }
-        if(paciente0 != null){
+        else if(paciente0 != null){
+            System.out.println("Login como paciente");
             usuario0.setEmail(paciente0.getEmail());
             usuario0.setSenha(paciente0.getSenha());
             usuario0.setNome(paciente0.getNome());
             usuario0.setPapel("paciente");
         }
-        if(admin0 != null){
+        else if(admin0 != null){
+            System.out.println("Login como admin");
             usuario0.setEmail(admin0.getEmail());
             usuario0.setSenha(admin0.getSenha());
             usuario0.setNome(admin0.getNome());
             usuario0.setPapel("admin");
         }
         else {
+            System.out.println("Usuário não encontrado");
             throw new UsernameNotFoundException("Could not find user");
         }
 

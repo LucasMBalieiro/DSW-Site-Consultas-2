@@ -42,11 +42,13 @@ public class WebSecurityConfig{
         http
                 .authorizeHttpRequests((authz) -> authz
                         .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
+                        .requestMatchers("/").permitAll()
                         .requestMatchers("/home").permitAll()
                         .requestMatchers("/login").permitAll()
-                        .requestMatchers("/admin/**").hasRole("admin")
-                        .requestMatchers("/medico/**").hasRole("medico")
-                        .requestMatchers("/paciente/**").hasRole("paciente")
+                        .requestMatchers("/admin/**").hasAuthority("admin")
+                        .requestMatchers("/medico/**").hasAuthority("medico")
+                        .requestMatchers("/paciente/**").hasAuthority("paciente")
+                        .requestMatchers("/lista/**").permitAll()
                         .anyRequest().authenticated()
                 )
                 .formLogin((form) -> form
@@ -56,8 +58,8 @@ public class WebSecurityConfig{
                 .logout((logout) -> logout
                         .logoutSuccessUrl("/")
                         .permitAll()
-                )
-                .httpBasic(withDefaults());
+                );
+                //.httpBasic(withDefaults());
 
         return http.build();
     }
