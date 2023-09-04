@@ -32,11 +32,9 @@ public interface MedicoRepository extends JpaRepository<MedicoModel, UUID> {
     @Query(value = "SELECT userID FROM TB_MEDICOS medicos WHERE medicos.email = :email", nativeQuery = true)
     public UUID findIdByEmail(@Param("email") String email);
 
-
     void deleteByCrm(Crm id);
 
     public MedicoModel findByUserID(UUID id);
-
 
     @Query(value = "SELECT * FROM TB_MEDICOS medicos WHERE medicos.email = :email", nativeQuery = true)
     public MedicoModel findbyEmail(@Param("email") String email);

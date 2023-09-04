@@ -94,25 +94,25 @@ public class AdminController {
             return "admin/cadastroPaciente";
         }
         PacienteModel paciente0 = paciente.buscarPorID(pacienteRecordDto.getUserID());
-        if(paciente0.getSenha() != null && !paciente0.getSenha().equals("")){
+        if(pacienteRecordDto.getSenha() != null && !pacienteRecordDto.getSenha().equals("")){
             paciente0.setSenha(pacienteRecordDto.getSenha());
         }
-        if(paciente0.getEmail() != null){
+        if(pacienteRecordDto.getEmail() != null){
             paciente0.setEmail(pacienteRecordDto.getEmail());
         }
-        if(paciente0.getNome() != null && !paciente0.getNome().equals("")){
+        if(pacienteRecordDto.getNome() != null && !pacienteRecordDto.getNome().equals("")){
             paciente0.setNome(pacienteRecordDto.getNome());
         }
-        if(paciente0.getCpf() != null){
+        if(pacienteRecordDto.getCpf() != null){
             paciente0.setCpf(pacienteRecordDto.getCpf());
         }
-        if(paciente0.getSexo() != null && !paciente0.getSexo().equals("")){
+        if(pacienteRecordDto.getSexo() != null && !pacienteRecordDto.getSexo().equals("")){
             paciente0.setSexo(pacienteRecordDto.getSexo());
         }
-        if(paciente0.getDataNascimento() != null){
+        if(pacienteRecordDto.getDataNascimento() != null){
             paciente0.setDataNascimento(pacienteRecordDto.getDataNascimento());
         }
-        if(paciente0.getTelefone() != null){
+        if(pacienteRecordDto.getTelefone() != null){
             paciente0.setTelefone(pacienteRecordDto.getTelefone());
         }
 
@@ -184,23 +184,23 @@ public class AdminController {
             return "admin/cadastroMedico";
         }
         MedicoModel medico0 = medico.buscarMedicoPorID(medicoRecordDto.getUserID());
-        if(medico0.getSenha() != null && !medico0.getSenha().equals("")){
+        if(medicoRecordDto.getSenha() != null && !medicoRecordDto.getSenha().equals("")){
             medico0.setSenha(medicoRecordDto.getSenha());
         }
-        if(medico0.getEmail() != null){
+        if(medicoRecordDto.getEmail() != null){
             medico0.setEmail(medicoRecordDto.getEmail());
         }
-        if(medico0.getNome() != null && !medico0.getNome().equals("")){
+        if(medicoRecordDto.getNome() != null && !medicoRecordDto.getNome().equals("")){
             medico0.setNome(medicoRecordDto.getNome());
         }
-        if(medico0.getCrm() != null){
+        if(medicoRecordDto.getCrm() != null){
             medico0.setCrm(medicoRecordDto.getCrm());
         }
-        if(medico0.getEspecialidade() != null && !medico0.getEspecialidade().equals("")){
+        if(medicoRecordDto.getEspecialidade() != null && !medicoRecordDto.getEspecialidade().equals("")){
             medico0.setEspecialidade(medicoRecordDto.getEspecialidade());
         }
-        if(medico0.getSenha() != null){
-            medico0.setSenha(encoder.encode(medico0.getSenha()));
+        if(medicoRecordDto.getSenha() != null){
+            medico0.setSenha(encoder.encode(medicoRecordDto.getSenha()));
         }
 
         System.out.println("\n\n" +

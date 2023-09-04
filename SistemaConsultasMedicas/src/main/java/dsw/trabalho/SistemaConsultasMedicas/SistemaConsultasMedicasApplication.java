@@ -97,26 +97,26 @@ public class SistemaConsultasMedicasApplication {
 				adminRepository.save(u1);
 			}
 
-			ConsultaModel c1 = new ConsultaModel();
-			c1.setMedico(m1);
-			c1.setPaciente(p1);
-			c1.setDataConsulta("06-09-2023");
-			c1.setHorarioConsulta(new HorarioConsulta("14:00"));
-			consultaRepository.save(c1);
-
-			ConsultaModel c2 = new ConsultaModel();
-			c2.setMedico(m1);
-			c2.setPaciente(p2);
-			c2.setDataConsulta("07-09-2023");
-			c2.setHorarioConsulta(new HorarioConsulta("15:00"));
-			consultaRepository.save(c2);
-
-			ConsultaModel c3 = new ConsultaModel();
-			c3.setMedico(m2);
-			c3.setPaciente(p1);
-			c3.setDataConsulta("14-09-2023");
-			c3.setHorarioConsulta(new HorarioConsulta("09:30"));
-			consultaRepository.save(c3);
+//			ConsultaModel c1 = new ConsultaModel();
+//			c1.setMedico(m1);
+//			c1.setPaciente(p1);
+//			c1.setDataConsulta("06-09-2023");
+//			c1.setHorarioConsulta(new HorarioConsulta("14:00"));
+//			consultaRepository.save(c1);
+//
+//			ConsultaModel c2 = new ConsultaModel();
+//			c2.setMedico(m1);
+//			c2.setPaciente(p2);
+//			c2.setDataConsulta("07-09-2023");
+//			c2.setHorarioConsulta(new HorarioConsulta("15:00"));
+//			consultaRepository.save(c2);
+//
+//			ConsultaModel c3 = new ConsultaModel();
+//			c3.setMedico(m2);
+//			c3.setPaciente(p1);
+//			c3.setDataConsulta("14-09-2023");
+//			c3.setHorarioConsulta(new HorarioConsulta("09:30"));
+//			consultaRepository.save(c3);
 		};
 	}
 

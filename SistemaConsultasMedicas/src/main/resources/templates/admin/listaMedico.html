@@ -95,11 +95,8 @@
 
         <!-- Link de retorno à tela de login -->
         <a class="link-login" th:href="@{/}" th:text="#{medico.botao.voltar.label}"></a>
+        <a class="link-login" th:href="@{/admin/cadastrarMedico}" th:text="#{medico.nova.label}"></a>
     </div>
-    <a class="btn btn-primary btn-md" th:href="@{/admin/cadastrarMedico}" role="button">
-        <span class="oi oi-plus" title="Cadastro" aria-hidden="true"></span>
-        <span th:text="#{medico.nova.label}"></span>
-    </a>
 </div>
 </body>
 </html>
