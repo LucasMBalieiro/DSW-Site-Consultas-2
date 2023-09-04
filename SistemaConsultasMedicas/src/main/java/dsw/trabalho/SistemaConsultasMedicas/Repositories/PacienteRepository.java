@@ -20,4 +20,7 @@ public interface PacienteRepository extends JpaRepository<PacienteModel, UUID> {
     public UUID findIdByEmail(@Param("email") String email);
 
     void deleteByCpf(Cpf cpf);
+
+    @Query(value = "SELECT * FROM TB_PACIENTES pacientes WHERE pacientes.email = :email", nativeQuery = true)
+    public PacienteModel findByEmail(@Param("email") String email);
 }

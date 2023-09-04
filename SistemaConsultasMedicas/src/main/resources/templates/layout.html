@@ -30,12 +30,12 @@
 <div class="layout-main">
 	<aside>
 		<nav th:replace="fragments/sidebar :: nav-sidebar">
-			<span>menu</span>
+			<span>Menu</span>
 		</nav>
 	</aside>
 
 	<section th:replace="home :: corpo">
-		<div>conteúdo principal das páginas</div>
+		<div>th:text="#{title.content.label}"</div>
 	</section>
 </div>
 
