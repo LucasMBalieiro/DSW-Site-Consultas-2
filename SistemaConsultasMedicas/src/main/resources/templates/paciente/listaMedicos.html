@@ -5,63 +5,53 @@
     <meta charset="UTF-8"/>
 </head>
 <body>
-<section class="layout-content" layout:fragment="corpo">
-
-    <nav class="navbar navbar-expand-md bg-light">
-        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <i class="oi oi-caret-right"></i>
-                    <span th:text="#{medico.listar.label}"></span>
-                </li>
-            </ul>
-            <a class="btn btn-primary btn-md" th:href="@{/clientes/cadastrar}" role="button">
-                <span class="oi oi-plus" title="Cadastro" aria-hidden="true"></span>
-                <span th:text="#{locadora.cadastrar.label}"></span>
-            </a>
-        </div>
-    </nav>
-
+<div layout:fragment="content" th:remove="tag">
     <div class="container" id="listagem">
+        <br /> <br /> <br />
 
         <div th:replace="fragments/alert"></div>
 
+        <h1 class="display-4" th:text="#{medico.lista.label}">Listagem dos Medicos</h1>
+
+        <form action="#" method="get">
+            <div class="form-group">
+                <label for="especialidade" th:text="#{medico.especialidade.label}"></label>
+                <select class="form-control" id="especialidade" name="especialidade">
+                    <option value="" th:text="#{medico.listartodos.label}"></option>
+                    <option th:each="especialidade : ${especialidade}" th:value="${especialidade}" th:text="${especialidade}"></option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary btn-filtrar" th:text="#{medico.botao.filtrar.label}"></button>
+        </form>
+
         <div class="table-responsive">
             <table class="table table-striped table-hover table-sm">
-                <thead>
+                <thead class="thead-dark">
                 <tr>
-                    <th>#</th>
-                    <th th:text="#{locadora.cnpj.label}"></th>
-                    <th th:text="#{locadora.name.label}"></th>
-                    <th th:text="#{locadora.city.label}"></th>
-                    <th sec:authorize="hasRole('ROLE_ADMIN')" th:text="#{acao.label}"></th>
+                    <th th:text="#{medico.crm.label}">CRM</th>
+                    <th th:text="#{medico.especialidade.label}">Especialidade</th>
+                    <th th:text="#{medico.email.label}">Email</th>
+                    <th th:text="#{medico.name.label}">Nome</th>
+                    <th sec:authorize="hasRole('paciente')" th:text="#{acao.label}"></th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="locadora : ${locadoras}">
-                    <td th:text="${locadora.id}"></td>
-                    <td th:text="${locadora.cnpj}"></td>
-                    <td th:text="${locadora.name}"></td>
-                    <td th:text="${locadora.city}"></td>
-                    <td sec:authorize="hasRole('ROLE_ADMIN')" colspan="2">
-                        <a class="btn btn-info btn-sm" th:href="@{/locadoras/editar/{id} (id=${locadora.id}) }"
+                <tr th:each="medico : ${medicos}">
+                    <td th:text="${medico.getCrm().getCrmNumber()}"></td>
+                    <td th:text="${medico.especialidade}"></td>
+                    <td th:text="${medico.getEmail().getEmail()}"></td>
+                    <td th:text="${medico.nome}"></td>
+                    <td sec:authorize="hasRole('paciente')" colspan="2">
+                        <a class="btn btn-info btn-sm" th:href="@{/paciente/cadastroConsulta/(id=${medico.getUserID().toString()}) }"
                            role="button">
-                            <span class="oi oi-brush" th:title="#{link.editar.label}" aria-hidden="true"> </span>
+                            <span class="oi oi-brush" th:title="#{link.add.label}" aria-hidden="true"> </span>
                         </a>
-                        <button
-                                th:id="${'btn_locadoras/excluir/' + locadora.id}"
-                                type="button" class="btn btn-danger btn-sm"
-                                data-toggle="modal" data-target="#myModal">
-                            <span class="oi oi-circle-x" th:title="#{link.excluir.label}" aria-hidden="true"></span>
-                        </button>
                     </td>
                 </tr>
                 </tbody>
             </table>
         </div>
     </div>
-
-    <div th:replace="fragments/modal :: modal"></div>
-</section>
+</div>
 </body>
 </html>

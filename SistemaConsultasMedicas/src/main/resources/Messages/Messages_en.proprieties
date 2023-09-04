@@ -10,21 +10,36 @@ sidebar.link.cadastrar=Register
 sidebar.link.listar=List
 sidebar.link.medicos=Available Doctors
 sidebar.titulo.medico=Doctors
+sidebar.link.listarConsultas = List appointments
 sidebar.titulo.paciente=Patients
+sidebar.link.cadastrarConsultas = Add appointment
 sidebar.titulo.admin=Administrators
 sidebar.titulo.consulta=Appointments
 sidebar.titulo.explorar=Explore
 sidebar.link.cadastrar.consultas=Schedule an Appointment
+sidebar.titulo.Equipe = Team
+sidebar.link.verMedicos = Doctors
+sidebar.titulo.compra = OQUEISSOFAZ
+sidebar.link.listarMedico = List doctors
+sidebar.link.listarPaciente = List patients
 
 home.hello = Welcome to the doctors appointments webpage
 home.message = Make appointments!
 
 # Doctor Titles
 medico.cadastrar.label=Register Doctor
+medicos.listar.label=List Doctors
 medico.listar.label=List Doctors
+medico.nova.label = New doctor
 medico.name.label=Name
+name.label=Name
 medico.crm.label=CRM
+crm.label=CRM
 medico.email.label=Email
+email.label=Email
+filtro.label = Filter
+medico.especialidade=Specialty
+especialidade=Specialty
 medico.especialidade.label=Specialty
 medico.password.label=Password
 medico.lista.label = List of doctors
@@ -51,6 +66,13 @@ consulta.data.label=Date
 consulta.hora.label=Time
 consulta.medico.label=Doctor
 consulta.client.label=Patient
+consulta.horario.label = Time
+consulta.horario = Time
+consulta.paciente.nome = Name
+consulta.paciente.telefone = Phone
+consulta.paciente.sexo = Sex
+consulta.paciente.dataNasc = Birthdate
+consulta.botao.voltar.label = Back
 
 # Removal Messages
 remove.label.warning=Warning
@@ -59,6 +81,7 @@ remove.label.message=Click OK to proceed with the deletion...
 # Button & Checkbox Messages
 link.excluir.label=Delete
 link.editar.label=Edit
+link.adicionar.label = Add
 button.cancelar.label=Cancel
 button.salvar.label=Save
 select.label=Select...
@@ -110,6 +133,7 @@ login.services.title= Explore our services
 login.services.medicos= Meet the doctors
 login.listagem = List of doctors
 user.role= Role
+login.text = Login
 
 # Explore
 explore.medicos.title=Bicycle Doctors
@@ -129,6 +153,7 @@ explore.medicos.filter.option=Select a city...
 # Patient Messages
 paciente.cadastrar.label=Register Patients
 paciente.listar.label=List Patients
+paciente.nova.label = New Patient
 paciente.name.label=Full Name
 paciente.password.label=Password
 paciente.email.label=Email
