@@ -89,16 +89,34 @@ public class AdminController {
         if (result.getFieldError("telefone") != null)
             errors += 1;
 
-        if (result.getFieldErrorCount() > errors+1 || result.getFieldError("senha") != null || result.getFieldError("nome") != null || result.getFieldError("sexo") != null || result.getFieldError("dataNascimento") != null || result.getFieldError("papel") != null) {
+        if (result.getFieldErrorCount() > errors+1 || result.getFieldError("senha") == null || result.getFieldError("nome") == null || result.getFieldError("sexo") == null || result.getFieldError("dataNascimento") == null || result.getFieldError("papel") == null) {
             System.out.println("Falhou");
-
             return "admin/cadastroPaciente";
         }
-        PacienteModel paciente0 = new PacienteModel();
-        BeanUtils.copyProperties(pacienteRecordDto, paciente0);
-        if(paciente0.getSenha() != null){
-            paciente0.setSenha(encoder.encode(paciente0.getSenha()));
+        PacienteModel paciente0 = paciente.buscarPorID(pacienteRecordDto.getUserID());
+        if(paciente0.getSenha() != null && !paciente0.getSenha().equals("")){
+            paciente0.setSenha(pacienteRecordDto.getSenha());
         }
+        if(paciente0.getEmail() != null){
+            paciente0.setEmail(pacienteRecordDto.getEmail());
+        }
+        if(paciente0.getNome() != null && !paciente0.getNome().equals("")){
+            paciente0.setNome(pacienteRecordDto.getNome());
+        }
+        if(paciente0.getCpf() != null){
+            paciente0.setCpf(pacienteRecordDto.getCpf());
+        }
+        if(paciente0.getSexo() != null && !paciente0.getSexo().equals("")){
+            paciente0.setSexo(pacienteRecordDto.getSexo());
+        }
+        if(paciente0.getDataNascimento() != null){
+            paciente0.setDataNascimento(pacienteRecordDto.getDataNascimento());
+        }
+        if(paciente0.getTelefone() != null){
+            paciente0.setTelefone(pacienteRecordDto.getTelefone());
+        }
+
+
         paciente.salvar(paciente0);
         attr.addFlashAttribute("sucess", "Cliente editado com sucesso.");
         return "redirect:/admin/listarPaciente";
@@ -165,8 +183,22 @@ public class AdminController {
 
             return "admin/cadastroMedico";
         }
-        MedicoModel medico0 = new MedicoModel();
-        BeanUtils.copyProperties(medicoRecordDto, medico0);
+        MedicoModel medico0 = medico.buscarMedicoPorID(medicoRecordDto.getUserID());
+        if(medico0.getSenha() != null && !medico0.getSenha().equals("")){
+            medico0.setSenha(medicoRecordDto.getSenha());
+        }
+        if(medico0.getEmail() != null){
+            medico0.setEmail(medicoRecordDto.getEmail());
+        }
+        if(medico0.getNome() != null && !medico0.getNome().equals("")){
+            medico0.setNome(medicoRecordDto.getNome());
+        }
+        if(medico0.getCrm() != null){
+            medico0.setCrm(medicoRecordDto.getCrm());
+        }
+        if(medico0.getEspecialidade() != null && !medico0.getEspecialidade().equals("")){
+            medico0.setEspecialidade(medicoRecordDto.getEspecialidade());
+        }
         if(medico0.getSenha() != null){
             medico0.setSenha(encoder.encode(medico0.getSenha()));
         }
