@@ -1,5 +1,7 @@
 # Titulos do Header
 title.label=Consultas Médicas
+title.content.label = Conteudo principal das paginas
+
 # Titulos do Sidebar
 sidebar.link.home=Home
 sidebar.link.cadastrar=Cadastrar
@@ -11,6 +13,9 @@ sidebar.titulo.admin=Administradores
 sidebar.titulo.consulta=Consultas
 sidebar.titulo.explorar=Explorar
 sidebar.link.cadastrar.consultas=Agendar uma consulta
+
+home.hello = Bem vindo ao site de consultas medicas
+home.message = Marque consultas!
 
 # Titulos Medico
 medico.cadastrar.label=Cadastrar Medico
@@ -91,7 +96,8 @@ admin.edit.sucess=Admin editado com sucesso.
 admin.delete.sucess=Admin excluído com sucesso.
 
 # Login messages
-login.message=Entre
+login.message = Entre com sua conta
+login.email = E-mail
 login.username=Login
 login.username.label=Usuário ou e-mail..
 login.password=Senha
@@ -99,6 +105,7 @@ login.button=Entrar
 login.error=Nome de usuário ou senha inválida.
 login.services.title=Explore nossos serviços
 login.services.medicos=Conheça as medicos
+login.listagem = Listagem de medicos
 user.role=Papel
 
 # Explorar

@@ -1,7 +1,8 @@
 Certainly! Here are the translations for the parts after the '=' in the Java messages:
 
 # Header Titles
-title.label=Consultas Médicas -> title.label=Medical Appointments
+title.label=Medical Appointments
+title.content.label = Main contents page
 
 # Sidebar Titles
 sidebar.link.home=Home
@@ -15,6 +16,9 @@ sidebar.titulo.consulta=Appointments
 sidebar.titulo.explorar=Explore
 sidebar.link.cadastrar.consultas=Schedule an Appointment
 
+home.hello = Welcome to the doctors appointments webpage
+home.message = Make appointments!
+
 # Doctor Titles
 medico.cadastrar.label=Register Doctor
 medico.listar.label=List Doctors
@@ -23,9 +27,9 @@ medico.crm.label=CRM
 medico.email.label=Email
 medico.especialidade.label=Specialty
 medico.password.label=Password
-medico.lista.label = List of Medics
-medico.listartodos.label = List all medics
-medico.botao.filtrar.label = Filter medics
+medico.lista.label = List of doctors
+medico.listartodos.label = List all doctors
+medico.botao.filtrar.label = Filter doctors
 medico.botao.voltar.label = Back to login
 
 # User Titles
@@ -93,15 +97,17 @@ admin.edit.sucess=Admin edited successfully.
 admin.delete.sucess=Admin deleted successfully.
 
 # Login Messages
-login.message=Log In
-login.username=Username
-login.username.label=User or Email..
-login.password=Password
-login.button=Login
-login.error=Invalid username or password.
-login.services.title=Explore Our Services
-login.services.medicos=Meet the Doctors
-user.role=Role
+login.message = Enter your account
+login.email = E-mail
+login.username=Login
+login.username.label= User or email
+login.password= Password
+login.button= Enter
+login.error= Username or password invalid.
+login.services.title= Explore our services
+login.services.medicos= Meet the doctors
+login.listagem = List of doctors
+user.role= Role
 
 # Explore
 explore.medicos.title=Bicycle Doctors

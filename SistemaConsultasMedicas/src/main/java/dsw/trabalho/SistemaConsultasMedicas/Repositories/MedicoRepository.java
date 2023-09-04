@@ -34,4 +34,8 @@ public interface MedicoRepository extends JpaRepository<MedicoModel, UUID> {
 
 
     void deleteByCrm(Crm id);
+
+
+    @Query(value = "SELECT * FROM TB_MEDICOS medicos WHERE medicos.email = :email", nativeQuery = true)
+    public MedicoModel findbyEmail(@Param("email") String email);
 }
