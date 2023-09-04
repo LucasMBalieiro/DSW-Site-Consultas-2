@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html layout:decorate="~{layout}">
+<head>
+    <meta charset="UTF-8" />
+</head>
+<body>
+<section class="layout-content" layout:fragment="corpo">
+
+    <nav class="navbar navbar-expand-md bg-light">
+        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active"><i class="oi oi-caret-right"></i>
+                    <span th:text="#{consulta.cadastrar.label}"></span></li>
+            </ul>
+            <a class="btn btn-primary btn-md" th:href="@{/paciente/listarConsultas}"
+               role="button"> <span class="oi oi-spreadsheet" title="Listar"
+                                    aria-hidden="true"></span> <span th:text="#{consulta.listar.label}"></span>
+            </a>
+        </div>
+    </nav>
+
+    <div class="container" id="cadastro">
+
+        <div th:replace="fragments/alert"></div>
+
+        <form
+                th:action="${consulta.id == null} ? @{/paciente/salvarConsulta} : @{/paciente/editarConsulta}"
+                th:object="${consulta}" method="POST">
+
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="nomeMedico" th:text="#{nomeMedico.label}"></label>
+                    <input type="text" class="form-control" id="nomeMedico" th:attr="placeholder=#{nomeMedico.label}"
+                           autofocus="autofocus" th:field="*{nomeMedico}"/>
+<!--                           th:classappend="${#fields.hasErrors('nome')} ? is-invalid" />-->
+
+                    <div class="invalid-feedback">
+                        <span th:errors="*{nomeMedico}"></span>
+                    </div>
+                </div>
+
+                <div class="form-group col-md-6">
+                    <label for="horario" th:text="#{horario.label}"></label>
+                    <input type="text" class="form-control" id="horario" th:attr="placeholder=#{horario.label}"
+                           autofocus="autofocus" th:field="*{horario}"
+                           th:classappend="${#fields.hasErrors('horarioConsulta')} ? is-invalid" />
+
+                    <div class="invalid-feedback">
+                        <span th:errors="*{horario}"></span>
+                    </div>
+                </div>
+            </div>
+
+            <input type="hidden" id="id" th:field="*{id}" />
+            <button type="submit" class="btn btn-primary btn-sm" th:text="#{salvar.label}"></button>
+        </form>
+    </div>
+
+    <script th:inline="javascript">
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('papel').value = 'paciente';
+        });
+    </script>
+</section>
+</body>
+</html>

@@ -2,6 +2,7 @@ package dsw.trabalho.SistemaConsultasMedicas.Service.impl;
 
 import dsw.trabalho.SistemaConsultasMedicas.Models.Entities.MedicoModel;
 import dsw.trabalho.SistemaConsultasMedicas.Models.ValueObjects.Crm;
+import dsw.trabalho.SistemaConsultasMedicas.Models.ValueObjects.Email;
 import dsw.trabalho.SistemaConsultasMedicas.Repositories.ConsultaRepository;
 import dsw.trabalho.SistemaConsultasMedicas.Repositories.MedicoRepository;
 import dsw.trabalho.SistemaConsultasMedicas.Service.Spec.IMedicoService;
@@ -37,6 +38,9 @@ public class MedicoService implements IMedicoService {
     public List<MedicoModel> buscarTodos() {
         return dao.findAll();
     }
+
+    @Transactional(readOnly = true)
+    public UUID getIdByEmail(Email email){ return dao.findIdByEmail(email); }
 
     public void salvar(MedicoModel medico) { dao.save(medico); }
 

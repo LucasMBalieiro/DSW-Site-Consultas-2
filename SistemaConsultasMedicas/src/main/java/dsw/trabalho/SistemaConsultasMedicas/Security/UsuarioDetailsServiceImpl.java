@@ -1,6 +1,7 @@
 package dsw.trabalho.SistemaConsultasMedicas.Security;
 
 import dsw.trabalho.SistemaConsultasMedicas.Models.Entities.UsuarioModel;
+import dsw.trabalho.SistemaConsultasMedicas.Models.ValueObjects.Email;
 import dsw.trabalho.SistemaConsultasMedicas.Repositories.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -18,12 +19,12 @@ public class UsuarioDetailsServiceImpl implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
         //todo como que usa Email aaaaaaaaa
-        UsuarioModel usuario = usuario.getUserByEmail(username);
+        UsuarioModel usuario0 = usuario.getUserByEmail(new Email(username));
 
-        if (usuario == null) {
+        if (usuario0 == null) {
             throw new UsernameNotFoundException("Could not find user");
         }
 
-        return new UsuarioDetails(usuario);
+        return new UsuarioDetails(usuario0);
     }
 }

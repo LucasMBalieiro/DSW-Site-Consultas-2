@@ -2,6 +2,8 @@ package dsw.trabalho.SistemaConsultasMedicas.Service.Spec;
 
 import dsw.trabalho.SistemaConsultasMedicas.Models.Entities.PacienteModel;
 import dsw.trabalho.SistemaConsultasMedicas.Models.ValueObjects.Cpf;
+import dsw.trabalho.SistemaConsultasMedicas.Models.ValueObjects.Email;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -17,4 +19,6 @@ public interface IPacienteService {
     public List<PacienteModel> buscarTodos();
 
     public Optional<PacienteModel> buscarPorID(UUID id);
+
+    public UUID getIdByEmail(Email email);
 }

@@ -5,6 +5,7 @@ import dsw.trabalho.SistemaConsultasMedicas.Dtos.MedicoRecordDto;
 import dsw.trabalho.SistemaConsultasMedicas.Models.Entities.ConsultaModel;
 import dsw.trabalho.SistemaConsultasMedicas.Models.Entities.MedicoModel;
 import dsw.trabalho.SistemaConsultasMedicas.Models.ValueObjects.Crm;
+import dsw.trabalho.SistemaConsultasMedicas.Models.ValueObjects.Email;
 import dsw.trabalho.SistemaConsultasMedicas.Repositories.ConsultaRepository;
 import dsw.trabalho.SistemaConsultasMedicas.Repositories.MedicoRepository;
 import dsw.trabalho.SistemaConsultasMedicas.Service.Spec.IConsultaService;
@@ -15,6 +16,8 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -38,20 +41,18 @@ public class MedicoController {
 
     private final PasswordEncoder encoder;
 
-    //todo ver qual metodo usar
-    private UUID idMedico;
-
     public MedicoController(PasswordEncoder encoder, MedicoRepository medicoRepository) { this.encoder = encoder; }
 
     @GetMapping("/listarConsultas")
     public String listarConsultas(ModelMap model){
-        model.addAttribute("paciente", consulta.buscarPorMedico(idMedico));
-        return "medico/lista";
-    }
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String email = null;
+        if(principal instanceof UserDetails){
+            email = ((UserDetails)principal).getUsername();
+        }
 
-    @GetMapping("/listarConsultas/{id}")
-    public String listaConsultas(ModelMap model, @PathVariable("id") UUID id){
-        model.addAttribute("consulta", consulta.buscarPorMedico(id));
+        UUID idMedico = medico.getIdByEmail(new Email(email));
+        model.addAttribute("consultas", consulta.buscarPorMedico(idMedico));
         return "medico/lista";
     }
 
