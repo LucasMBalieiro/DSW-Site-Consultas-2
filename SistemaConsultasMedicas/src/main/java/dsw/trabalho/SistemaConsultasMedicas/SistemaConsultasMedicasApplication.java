@@ -1,5 +1,6 @@
 package dsw.trabalho.SistemaConsultasMedicas;
 
+import dsw.trabalho.SistemaConsultasMedicas.Models.Entities.AdminModel;
 import dsw.trabalho.SistemaConsultasMedicas.Models.Entities.MedicoModel;
 import dsw.trabalho.SistemaConsultasMedicas.Models.Entities.PacienteModel;
 import dsw.trabalho.SistemaConsultasMedicas.Models.Entities.UsuarioModel;
@@ -37,7 +38,7 @@ public class SistemaConsultasMedicasApplication {
 			p1.setCpf(new Cpf("14059211613"));
 			p1.setTelefone(new Telefone("992391803"));
 			p1.setDataNascimento("18-03-2003");
-			p1.setSexo("Masculino");
+			p1.setSexo("M");
 			pacienteRepository.save(p1);
 
 			PacienteModel p2 = new PacienteModel();
@@ -47,17 +48,17 @@ public class SistemaConsultasMedicasApplication {
 			p2.setCpf(new Cpf("31611295041"));
 			p2.setTelefone(new Telefone("998563227"));
 			p2.setDataNascimento("27-08-1998");
-			p2.setSexo("Masculino");
+			p2.setSexo("M");
 			pacienteRepository.save(p2);
 
 			PacienteModel p3 = new PacienteModel();
 			p3.setNome("Gabriela Andrade Santos");
 			p3.setEmail(new Email("gabi.santos@gmail.com"));
 			p3.setSenha(encoder.encode("senhagabi"));
-			p3.setCpf(new Cpf("98672374851"));
+			p3.setCpf(new Cpf("52778370862"));
 			p3.setTelefone(new Telefone("987323339"));
 			p3.setDataNascimento("16-05-2001");
-			p3.setSexo("Feminino");
+			p3.setSexo("F");
 			pacienteRepository.save(p3);
 
 			MedicoModel m1 = new MedicoModel();
@@ -84,7 +85,7 @@ public class SistemaConsultasMedicasApplication {
 			m3.setEspecialidade("Oltalmologista");
 			medicoRepository.save(m3);
 
-			UsuarioModel u1 = new UsuarioModel("admin");
+			AdminModel u1 = new AdminModel();
 			u1.setNome("Ademir");
 			u1.setEmail(new Email("admin@gmail.com"));
 			u1.setSenha(encoder.encode("senhaadmin"));
