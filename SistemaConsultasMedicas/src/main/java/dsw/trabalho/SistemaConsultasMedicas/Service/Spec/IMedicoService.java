@@ -15,7 +15,7 @@ public interface IMedicoService {
 
     public MedicoModel buscarMedicoPorCRM(String crm);
 
-    public Optional<MedicoModel> buscarMedicoPorID(UUID id);
+    public MedicoModel buscarMedicoPorID(UUID id);
 
     public List<MedicoModel> buscarPorEspecialidade(String especialidade);
 

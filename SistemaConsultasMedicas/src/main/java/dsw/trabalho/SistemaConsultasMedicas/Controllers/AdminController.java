@@ -51,7 +51,7 @@ public class AdminController {
 
     @GetMapping("/listarPaciente")
     public String listarPaciente(ModelMap model){
-        model.addAttribute("paciente", paciente.buscarTodos());
+        model.addAttribute("pacientes", paciente.buscarTodos());
         return "admin/listaPaciente";
     }
     @GetMapping("/cadastrarPaciente")
@@ -75,12 +75,12 @@ public class AdminController {
 
     @GetMapping("/editarPaciente/{id}")
     public String preeditarPaciente(@PathVariable("id") UUID id, ModelMap model){
-        model.addAttribute("paciente_id", paciente.buscarPorID(id));
+        model.addAttribute("paciente", paciente.buscarPorID(id));
         return "admin/cadastroPaciente";
     }
 
     @PostMapping("/editarPaciente")
-    public String editarPaciente(@Valid PacienteRecordDto pacienteRecordDto, BindingResult result, RedirectAttributes attr) {
+    public String editarPaciente(@Valid PacienteModel pacienteRecordDto, BindingResult result, RedirectAttributes attr) {
         Integer errors = 0;
         if (result.getFieldError("CPF") != null)
             errors += 1;
@@ -95,7 +95,10 @@ public class AdminController {
             return "admin/cadastroPaciente";
         }
         PacienteModel paciente0 = new PacienteModel();
-        paciente0.setSenha(encoder.encode(paciente0.getSenha()));
+        BeanUtils.copyProperties(pacienteRecordDto, paciente0);
+        if(paciente0.getSenha() != null){
+            paciente0.setSenha(encoder.encode(paciente0.getSenha()));
+        }
         paciente.salvar(paciente0);
         attr.addFlashAttribute("sucess", "Cliente editado com sucesso.");
         return "redirect:/admin/listarPaciente";
@@ -110,13 +113,13 @@ public class AdminController {
 
     @GetMapping("/listarMedico")
     public String listarMedico(ModelMap model){
-        model.addAttribute("medico", medico.buscarTodos());
+        model.addAttribute("medicos", medico.buscarTodos());
         return "admin/listaMedico";
     }
 
     @GetMapping("/cadastrarMedico")
     public String cadastrarMedico(){
-        return "/admin/cadastromedico";
+        return "/admin/cadastroMedico";
     }
 
     @PostMapping("/salvarMedico")
@@ -135,12 +138,12 @@ public class AdminController {
 
     @GetMapping("/editarMedico/{id}")
     public String preeditarMedico(@PathVariable("id") UUID id, ModelMap model){
-        model.addAttribute("medico_id", medico.buscarMedicoPorID(id));
+        model.addAttribute("medico", medico.buscarMedicoPorID(id));
         return "admin/cadastroMedico";
     }
 
     @PostMapping("/editarMedico")
-    public String editarMedico(@Valid MedicoRecordDto medicoRecordDto, BindingResult result, RedirectAttributes attr) {
+    public String editarMedico(@Valid @ModelAttribute("medico") MedicoModel medicoRecordDto, BindingResult result, RedirectAttributes attr) {
         Integer errors = 0;
         if (result.getFieldError("CRM") != null)
             errors += 1;
@@ -149,13 +152,32 @@ public class AdminController {
         if (result.getFieldError("telefone") != null)
             errors += 1;
 
-        if (result.getFieldErrorCount() > errors+1 || result.getFieldError("senha") != null || result.getFieldError("nome") != null || result.getFieldError("sexo") != null || result.getFieldError("dataNascimento") != null || result.getFieldError("papel") != null) {
+
+        System.out.println("\n\n" +
+                medicoRecordDto.getEmail() + "\n" +
+                medicoRecordDto.getSenha() + "\n" +
+                medicoRecordDto.getCrm() + "\n" +
+                medicoRecordDto.getEspecialidade() + "\n"
+                + "\n\n");
+
+        if (result.getFieldErrorCount() > errors+1 || result.getFieldError("senha") != null || result.getFieldError("nome") != null || result.getFieldError("sexo") != null || result.getFieldError("dataNascimento") != null ){
             System.out.println("Falhou");
 
             return "admin/cadastroMedico";
         }
         MedicoModel medico0 = new MedicoModel();
-        medico0.setSenha(encoder.encode(medico0.getSenha()));
+        BeanUtils.copyProperties(medicoRecordDto, medico0);
+        if(medico0.getSenha() != null){
+            medico0.setSenha(encoder.encode(medico0.getSenha()));
+        }
+
+        System.out.println("\n\n" +
+                medico0.getEmail() + "\n" +
+                medico0.getSenha() + "\n" +
+                medico0.getCrm() + "\n" +
+                medico0.getEspecialidade() + "\n"
+                + "\n\n");
+
         medico.salvar(medico0);
         attr.addFlashAttribute("sucess", "Cliente editado com sucesso.");
         return "redirect:/admin/listarMedico";

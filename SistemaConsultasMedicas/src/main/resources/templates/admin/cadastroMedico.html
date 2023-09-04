@@ -12,9 +12,9 @@
                 <li class="nav-item active"><i class="oi oi-caret-right"></i>
                     <span th:text="#{medico.cadastrar.label}"></span></li>
             </ul>
-            <a class="btn btn-primary btn-md" th:href="@{/admin/listarMedicos}"
+            <a class="btn btn-primary btn-md" th:href="@{/admin/listarMedico}"
                role="button"> <span class="oi oi-spreadsheet" title="Listar"
-                                    aria-hidden="true"></span> <span th:text="#{medicos.listar.label}"></span>
+                                    aria-hidden="true"></span> <span th:text="#{medico.listar.label}"></span>
             </a>
         </div>
     </nav>
@@ -24,24 +24,14 @@
         <div th:replace="fragments/alert"></div>
 
         <form
-                th:action="${medico.id == null} ? @{/medico/salvar} : @{/medico/editar}"
+                th:action="${medico.getUserID() == null} ? @{/admin/salvarMedico} : @{/admin/editarMedico}"
                 th:object="${medico}" method="POST">
 
             <div class="form-row">
                 <div class="form-group col-md-6">
-                    <label for="nome" th:text="#{nome.label}"></label>
-                    <input type="text" class="form-control" id="nome" th:attr="placeholder=#{nome.label}"
-                           autofocus="autofocus" th:field="*{nome}"
-                           th:classappend="${#fields.hasErrors('nome')} ? is-invalid" />
-
-                    <div class="invalid-feedback">
-                        <span th:errors="*{nome}"></span>
-                    </div>
-                </div>
-
-                <div class="form-group col-md-6">
-                    <label for="email" th:text="#{email.label}"></label>
-                    <input type="text" class="form-control" id="email" th:attr="placeholder=#{email.label}"
+                    <label th:text="#{medico.username.label}" for="email"></label>
+                    <input type="text" class="form-control" id="email"
+                           th:placeholder="#{medico.username.label}"
                            autofocus="autofocus" th:field="*{email}"
                            th:classappend="${#fields.hasErrors('email')} ? is-invalid" />
 
@@ -51,40 +41,56 @@
                 </div>
 
                 <div class="form-group col-md-6">
+                    <label th:text="#{medico.senha.label}" for="senha"></label>
+                    <input type="password" class="form-control" id="senha"
+                           th:placeholder="#{medico.senha.label}" autofocus="autofocus"
+                           th:field="*{senha}"
+                           th:classappend="${#fields.hasErrors('senha')} ? is-invalid"/>
 
-                    <label for="senha" th:text="#{senha.label}"></label>
-                    <input type="senha" class="form-control" id="senha" th:attr="placeholder=#{senha.label}"
-                           autofocus="autofocus" th:field="*{senha}" />
-<!--                           th:classappend="${(#fields.hasErrors('senha') && locadora.id == null) || (locadora.id != null && (#fields.errors('email').size > 1 || 3 > locadora.email.length()) ) } ? is-invalid" />-->
                     <div class="invalid-feedback">
                         <span th:errors="*{senha}"></span>
                     </div>
                 </div>
 
                 <div class="form-group col-md-6">
-                    <label for="CRM" th:text="#{CRM.label}"></label>
-                    <input type="text" class="form-control" id="CRM" placeholder="____/__"
-                           th:readonly="${medico.id != null}"
-                           autofocus="autofocus" th:field="*{CRM}"
-                           th:classappend="${#fields.hasErrors('CRM') && medico.id == null} ? is-invalid"
-                           data-mask="0000/00" />
+                    <label th:text="#{medico.nome.label}" for="nome"></label>
+                    <input type="text" class="form-control" id="nome" th:field="*{nome}"
+                           th:placeholder="#{medico.nome.label}" autofocus="autofocus"
+                           th:classappend="${#fields.hasErrors('nome')} ? is-invalid" />
 
                     <div class="invalid-feedback">
-                        <span th:errors="*{CRM}"></span>
+                        <span th:errors="*{nome}"></span>
+                    </div>
+                </div>
+
+                <div class="form-group col-md-6">
+                    <label th:text="#{medico.crm.label}" for="crm"></label>
+                    <input type="text" class="form-control" id="crm" th:field="*{crm}"
+                           th:placeholder="#{medico.crm.label}" autofocus="autofocus"
+                           th:classappend="${#fields.hasErrors('crm')} ? is-invalid" />
+
+                    <div class="invalid-feedback">
+                        <span th:errors="*{crm}"></span>
+                    </div>
+                </div>
+
+                <div class="form-group col-md-6">
+                    <label th:text="#{medico.especialidade.label}" for="name"></label>
+                    <input type="text" class="form-control" id="name" th:field="*{especialidade}"
+                           th:placeholder="#{medico.especialidade.label}" autofocus="autofocus"
+                           th:classappend="${#fields.hasErrors('especialidade')} ? is-invalid" />
+
+                    <div class="invalid-feedback">
+                        <span th:errors="*{especialidade}"></span>
                     </div>
                 </div>
             </div>
 
-            <input type="hidden" id="id" th:field="*{id}" />
-            <button type="submit" class="btn btn-primary btn-sm" th:text="#{salvar.label}"></button>
+            <input type="hidden" id="id" th:field="*{userID}" />
+            <button type="submit" th:text="#{button.salvar.label}"
+                    class="btn btn-primary btn-sm"></button>
         </form>
     </div>
-
-    <script th:inline="javascript">
-        document.addEventListener('DOMContentLoaded', function() {
-            document.getElementById('papel').value = 'medico';
-        });
-    </script>
 </section>
 </body>
 </html>

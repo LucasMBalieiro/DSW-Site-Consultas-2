@@ -7,6 +7,7 @@ import dsw.trabalho.SistemaConsultasMedicas.Models.ValueObjects.Crm;
 import dsw.trabalho.SistemaConsultasMedicas.Models.ValueObjects.Email;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
 import org.springframework.hateoas.RepresentationModel;
 
 

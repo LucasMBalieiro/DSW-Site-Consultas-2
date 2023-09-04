@@ -1,102 +1,103 @@
 <!DOCTYPE html>
-<html layout:decorate="~{layout}">
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout2}">
 <head>
-    <meta charset="UTF-8" />
-</head>
-<body>
-<section class="layout-content" layout:fragment="corpo">
-
-    <nav class="navbar navbar-expand-md bg-light">
-        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <i class="oi oi-caret-right"></i>
-                    <span th:text="#{paciente.listar.label}"></span>
-                </li>
-            </ul>
-            <a class="btn btn-primary btn-md" th:href="@{/admin/cadastrarPaciente}" role="button" sec:authorize="hasRole('ROLE_Admin')">
-                <span class="oi oi-plus" title="Cadastro" aria-hidden="true"></span>
-                <span th:text="#{paciente.nova.label}"></span>
-            </a>
-        </div>
-    </nav>
-
-    <script>
-        function filterFunction() {
-            // Declare variables
-            var input, filter, table, tr, td, i, selectedValue;
-            input = document.getElementById("modelFilter");
-            selectedValue = input.value.toUpperCase();
-            table = document.getElementById("cidade");
-            tr = table.getElementsByTagName("tr");
-
-            // Loop through all table rows, and hide those that don't match the selected value
-            for (i = 0; i < tr.length; i++) {
-                td = tr[i].getElementsByTagName("td")[5]; // índice 5 representa a coluna da cidade
-                if (td) {
-                    var cityName = td.textContent || td.innerText;
-                    if (selectedValue === "" || selectedValue === cityName.toUpperCase()) {
-                        tr[i].style.display = "table-row";
-                    } else {
-                        tr[i].style.display = "none";
-                    }
-                }
+    <title>Lista de Locadoras</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        /* Estilo personalizado para o container */
+        #listagem {
+            margin-top: 20px;
+        }
+        /* Estilo para o título */
+        h1 {
+            margin-bottom: 20px;
+            font-size: 32px;
+        }
+        /* Estilo para o formulário de filtro */
+        form {
+            margin-bottom: 20px;
+        }
+        /* Estilo para o botão de filtro */
+        .btn-filtrar {
+            margin-top: 5px;
+        }
+        /* Estilo para a tabela */
+        table {
+            margin-top: 20px;
+        }
+        th, td {
+            text-align: center;
+        }
+        /* Estilo para o botão de filtrar na versão mobile */
+        @media (max-width: 767px) {
+            .btn-filtrar {
+                width: 100%;
             }
         }
-    </script>
+        /* Estilo para o link de retorno à tela de login */
+        .link-login {
+            margin-top: 20px;
+            display: inline-block;
+            color: #007bff;
+            text-decoration: none;
+            border: 1px solid #007bff;
+            padding: 8px 12px;
+            border-radius: 4px;
+            transition: background-color 0.2s, color 0.2s;
+        }
+        .link-login:hover {
+            background-color: #007bff;
+            color: #ffffff;
+        }
+    </style>
+</head>
+<body>
+<div layout:fragment="content" th:remove="tag">
+    <div class="container" id="listagem">
+        <br /> <br /> <br />
 
-    <div class="container" id="listagem"></div>
+        <div th:replace="fragments/alert"></div>
 
-    <div class="form-group">
-        <label for="cidade" th:text="#{filtro.label}"></label>
-        <select id="modelFilter" class="form-control" onchange="filterFunction()">
-            <option value="" th:text="#{filtro.city.label}"></option>
-            <option th:each="paciente : ${paciente}" th:value="${paciente.CPF}" th:text="${paciente.especialidade}"></option>
-        </select>
+        <h1 class="display-4" th:text="#{paciente.lista.label}">Listagem dos Pacientes</h1>
+
+        <div class="table-responsive">
+            <table class="table table-striped table-hover table-sm">
+                <thead class="thead-dark">
+                <tr>
+                    <th th:text="#{paciente.cpf.label}">CPF</th>
+                    <th th:text="#{paciente.nome.label}">Especialidade</th>
+                    <th th:text="#{paciente.telefone.label}">Contato</th>
+                    <th th:text="#{paciente.sexo.label}">Sexo</th>
+                    <th th:text="#{paciente.dataNasc.label}">Data de nascimento</th>
+                    <th th:text="#{acao.label}"></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="paciente : ${pacientes}">
+                    <td th:text="${paciente.getCpf().getValor()}"></td>
+                    <td th:text="${paciente.getNome()}"></td>
+                    <td th:text="${paciente.getTelefone().getValor()}"></td>
+                    <td th:text="${paciente.getSexo()}"></td>
+                    <td th:text="${paciente.getDataNascimento()}"></td>
+                    <td colspan="2">
+                        <a class="btn btn-info btn-sm" th:href="@{/admin/editarPaciente/{id} (id=${paciente.getUserID()}) }"
+                           role="button">
+                            <span class="oi oi-brush" title="Editar" aria-hidden="true"> </span>
+                        </a>
+                        <button th:id="${#strings.concat('btn_admin/excluirPaciente/', paciente.getUserID())}"
+                                type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#myModal">
+                            <span class="oi oi-circle-x" title="Excluir" aria-hidden="true"></span>
+                        </button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Link de retorno à tela de login -->
+        <a class="link-login" th:href="@{/}" th:text="#{paciente.botao.voltar.label}"></a>
     </div>
-
-    <div th:replace="fragments/alert"></div>
-
-    <div class="table-responsive">
-        <table id="cidade" class="table table-striped table-hover table-sm">
-            <thead>
-            <tr>
-                <th>#</th>
-                <th th:text="#{CPF.label}"></th>
-                <th th:text="#{nome.label}"></th>
-                <th th:text="#{email.label}"></th>
-                <th th:text="#{telefone.label}"></th>
-                <th th:text="#{sexo.label}"></th>
-                <th th:text="#{dataNascimento.label}"></th>
-                <th th:text="#{acao.label}" sec:authorize="hasRole('ROLE_Admin')"></th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="PacienteModel : ${paciente}">
-                <td th:text="${PacienteModel.id}" data-cidade="${PacienteModel.cidade}"></td>
-                <td th:text="${PacienteModel.CPF}"></td>
-                <td th:text="${PacienteModel.nome}"></td>
-                <td th:text="${PacienteModel.email}"></td>
-                <td th:text="${PacienteModel.telefone}"></td>
-                <td th:text="${PacienteModel.sexo}"></td>
-                <td th:text="${PacienteModel.dataNascimento}"></td>
-                <td colspan="2" sec:authorize="hasRole('ROLE_Admin')">
-                    <a class="btn btn-info btn-sm" th:href="@{/admin/editarPaciente/{id} (id=${PacienteModel.id}) }"
-                       role="button" >
-                        <span class="oi oi-brush" title="Editar" aria-hidden="true"> </span>
-                    </a>
-                    <button th:id="${#strings.concat('btn_paciente/excluirPacientePorId/', PacienteModel.id)}"
-                            type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#myModal">
-                        <span class="oi oi-circle-x" title="Excluir" aria-hidden="true"></span>
-                    </button>
-                </td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
-    </div>
-
-    <div th:replace="fragments/modal :: modal"></div>
-</section>
+</div>
 </body>
 </html>

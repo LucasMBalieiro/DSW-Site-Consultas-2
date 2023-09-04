@@ -18,7 +18,7 @@ public interface IPacienteService {
 
     public List<PacienteModel> buscarTodos();
 
-    public Optional<PacienteModel> buscarPorID(UUID id);
+    public PacienteModel buscarPorID(UUID id);
 
     public UUID getIdByEmail(String email);
 }

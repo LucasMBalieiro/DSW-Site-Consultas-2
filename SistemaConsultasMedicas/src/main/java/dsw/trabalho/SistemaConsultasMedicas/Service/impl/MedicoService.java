@@ -29,7 +29,7 @@ public class MedicoService implements IMedicoService {
     public MedicoModel buscarMedicoPorCRM(String crm) { return dao.findByCrm(crm); }
 
     @Transactional(readOnly = true)
-    public Optional<MedicoModel> buscarMedicoPorID(UUID id) { return dao.findById(id); }
+    public MedicoModel buscarMedicoPorID(UUID id) { return dao.findByUserID(id); }
 
     @Transactional(readOnly = true)
     public List<MedicoModel> buscarPorEspecialidade(String especialidade) { return dao.findByEspecialidade(especialidade); }

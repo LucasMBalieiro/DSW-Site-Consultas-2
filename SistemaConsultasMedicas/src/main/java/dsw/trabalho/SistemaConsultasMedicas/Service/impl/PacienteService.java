@@ -36,8 +36,8 @@ public class PacienteService implements IPacienteService {
     }
 
     @Transactional(readOnly = true)
-    public Optional<PacienteModel> buscarPorID(UUID id){
-        return pacienteRepository.findById(id);
+    public PacienteModel buscarPorID(UUID id){
+        return pacienteRepository.findByUserID(id);
     }
 
     @Transactional(readOnly = true)

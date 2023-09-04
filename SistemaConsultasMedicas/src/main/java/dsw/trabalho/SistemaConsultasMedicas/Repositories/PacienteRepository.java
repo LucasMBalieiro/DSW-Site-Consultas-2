@@ -1,5 +1,6 @@
 package dsw.trabalho.SistemaConsultasMedicas.Repositories;
 
+import dsw.trabalho.SistemaConsultasMedicas.Models.Entities.MedicoModel;
 import dsw.trabalho.SistemaConsultasMedicas.Models.Entities.PacienteModel;
 import dsw.trabalho.SistemaConsultasMedicas.Models.ValueObjects.Cpf;
 import dsw.trabalho.SistemaConsultasMedicas.Models.ValueObjects.Email;
@@ -20,6 +21,8 @@ public interface PacienteRepository extends JpaRepository<PacienteModel, UUID> {
     public UUID findIdByEmail(@Param("email") String email);
 
     void deleteByCpf(Cpf cpf);
+
+    public PacienteModel findByUserID(UUID id);
 
     @Query(value = "SELECT * FROM TB_PACIENTES pacientes WHERE pacientes.email = :email", nativeQuery = true)
     public PacienteModel findByEmail(@Param("email") String email);
