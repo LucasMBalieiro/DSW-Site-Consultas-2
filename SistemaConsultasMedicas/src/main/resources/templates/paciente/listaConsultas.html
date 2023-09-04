@@ -39,8 +39,8 @@
                 </thead>
                 <tbody>
                 <tr th:each="consulta : ${consultas}">
-                    <td th:text="${consulta.medico}"></td>
-                    <td th:text="${consulta.horario}"></td>
+                    <td th:text="${consulta.medico.label}"></td>
+                    <td th:text="${consulta.horario.label}"></td>
 <!--                    <td th:text="${locadora.name}"></td>-->
 <!--                    <td th:text="${locadora.city}"></td>-->
                     <td sec:authorize="hasRole('paciente')" colspan="2">
