@@ -30,6 +30,8 @@ medico.listartodos.label = Listar todos os medicos
 medico.botao.filtrar.label = Filtrar medicos
 medico.botao.voltar.label = Voltar para login
 
+medico.name.error.label = Nome do medico errado
+
 # Titulos Usuario
 usuario.cadastrar.label=Cadastrar Usuário
 usuario.listar.label=Listar Usuários
@@ -47,6 +49,8 @@ consulta.data.label=Data
 consulta.hora.label=Hora
 consulta.medico.label=medico
 consulta.client.label=paciente
+
+horario.label = Horario
 
 # Mensagens Remoção
 remove.label.warning=Atenção

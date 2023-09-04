@@ -32,6 +32,8 @@ medico.listartodos.label = List all doctors
 medico.botao.filtrar.label = Filter doctors
 medico.botao.voltar.label = Back to login
 
+medico.name.error.label = Doctor's name was not found
+
 # User Titles
 usuario.cadastrar.label=Register User
 usuario.listar.label=List Users
