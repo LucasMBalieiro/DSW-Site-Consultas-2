@@ -3,6 +3,7 @@ package dsw.trabalho.SistemaConsultasMedicas.Repositories;
 import dsw.trabalho.SistemaConsultasMedicas.Models.Entities.ConsultaModel;
 import dsw.trabalho.SistemaConsultasMedicas.Models.Entities.MedicoModel;
 import dsw.trabalho.SistemaConsultasMedicas.Models.ValueObjects.Crm;
+import dsw.trabalho.SistemaConsultasMedicas.Models.ValueObjects.Email;
 import jakarta.validation.constraints.NotNull;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -27,6 +28,9 @@ public interface MedicoRepository extends JpaRepository<MedicoModel, UUID> {
 
     @Query(value = "SELECT especialidade FROM TB_MEDICOS medicos", nativeQuery = true)
     public List<String> findEspecialidades();
+
+    @Query(value = "SELECT userID FROM TB_MEDICOS medicos WHERE medicos.email = :email", nativeQuery = true)
+    public UUID findIdByEmail(@Param("email") Email email);
 
 
     void deleteByCrm(Crm id);

@@ -2,6 +2,7 @@ package dsw.trabalho.SistemaConsultasMedicas.Service.Spec;
 
 import dsw.trabalho.SistemaConsultasMedicas.Models.Entities.MedicoModel;
 import dsw.trabalho.SistemaConsultasMedicas.Models.ValueObjects.Crm;
+import dsw.trabalho.SistemaConsultasMedicas.Models.ValueObjects.Email;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
@@ -25,4 +26,6 @@ public interface IMedicoService {
     public void excluirPorCrm(Crm id);
 
     public void excluirPorID(UUID id);
+
+    public UUID getIdByEmail(Email email);
 }
