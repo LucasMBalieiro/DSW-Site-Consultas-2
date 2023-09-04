@@ -1,17 +1,8 @@
 package dsw.trabalho.SistemaConsultasMedicas;
 
-import dsw.trabalho.SistemaConsultasMedicas.Models.Entities.AdminModel;
-import dsw.trabalho.SistemaConsultasMedicas.Models.Entities.MedicoModel;
-import dsw.trabalho.SistemaConsultasMedicas.Models.Entities.PacienteModel;
-import dsw.trabalho.SistemaConsultasMedicas.Models.Entities.UsuarioModel;
-import dsw.trabalho.SistemaConsultasMedicas.Models.ValueObjects.Cpf;
-import dsw.trabalho.SistemaConsultasMedicas.Models.ValueObjects.Crm;
-import dsw.trabalho.SistemaConsultasMedicas.Models.ValueObjects.Email;
-import dsw.trabalho.SistemaConsultasMedicas.Models.ValueObjects.Telefone;
-import dsw.trabalho.SistemaConsultasMedicas.Repositories.AdminRepository;
-import dsw.trabalho.SistemaConsultasMedicas.Repositories.MedicoRepository;
-import dsw.trabalho.SistemaConsultasMedicas.Repositories.PacienteRepository;
-import dsw.trabalho.SistemaConsultasMedicas.Repositories.UsuarioRepository;
+import dsw.trabalho.SistemaConsultasMedicas.Models.Entities.*;
+import dsw.trabalho.SistemaConsultasMedicas.Models.ValueObjects.*;
+import dsw.trabalho.SistemaConsultasMedicas.Repositories.*;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -29,7 +20,7 @@ public class SistemaConsultasMedicasApplication {
 
 
 	@Bean
-	public CommandLineRunner demo(AdminRepository adminRepository, MedicoRepository medicoRepository, PacienteRepository pacienteRepository, BCryptPasswordEncoder encoder){
+	public CommandLineRunner demo(AdminRepository adminRepository, MedicoRepository medicoRepository, PacienteRepository pacienteRepository, BCryptPasswordEncoder encoder, ConsultaRepository consultaRepository){
 		return args -> {
 
 			PacienteModel p1 = new PacienteModel();
@@ -44,8 +35,8 @@ public class SistemaConsultasMedicasApplication {
 				pacienteRepository.save(p1);
 			}
 
+			PacienteModel p2 = new PacienteModel();
 			if(pacienteRepository.findByCpf("31611295041") == null) {
-				PacienteModel p2 = new PacienteModel();
 				p2.setNome("Julio Silva Pereira");
 				p2.setEmail(new Email("julio.spereira@gmail.com"));
 				p2.setSenha(encoder.encode("senhajulio"));
@@ -68,8 +59,8 @@ public class SistemaConsultasMedicasApplication {
 				pacienteRepository.save(p3);
 			}
 
+			MedicoModel m1 = new MedicoModel();
 			if(medicoRepository.findByCrm("987654CRM-BR") == null) {
-				MedicoModel m1 = new MedicoModel();
 				m1.setNome("Dr. Alan Demetrius");
 				m1.setEmail(new Email("alan.demetrius@gmail.com"));
 				m1.setSenha(encoder.encode("senhaalan"));
@@ -78,8 +69,8 @@ public class SistemaConsultasMedicasApplication {
 				medicoRepository.save(m1);
 			}
 
+			MedicoModel m2 = new MedicoModel();
 			if(medicoRepository.findByCrm("845017CRM-BR") == null) {
-				MedicoModel m2 = new MedicoModel();
 				m2.setNome("Dr. Murilo Naldi");
 				m2.setEmail(new Email("murilo.naldi@gmail.com"));
 				m2.setSenha(encoder.encode("senhamurilo"));
@@ -105,6 +96,27 @@ public class SistemaConsultasMedicasApplication {
 				u1.setSenha(encoder.encode("senhaadmin"));
 				adminRepository.save(u1);
 			}
+
+			ConsultaModel c1 = new ConsultaModel();
+			c1.setMedico(m1);
+			c1.setPaciente(p1);
+			c1.setDataConsulta("06-09-2023");
+			c1.setHorarioConsulta(new HorarioConsulta("14:00"));
+			consultaRepository.save(c1);
+
+			ConsultaModel c2 = new ConsultaModel();
+			c2.setMedico(m1);
+			c2.setPaciente(p2);
+			c2.setDataConsulta("07-09-2023");
+			c2.setHorarioConsulta(new HorarioConsulta("15:00"));
+			consultaRepository.save(c2);
+
+			ConsultaModel c3 = new ConsultaModel();
+			c3.setMedico(m2);
+			c3.setPaciente(p1);
+			c3.setDataConsulta("14-09-2023");
+			c3.setHorarioConsulta(new HorarioConsulta("09:30"));
+			consultaRepository.save(c3);
 		};
 	}
 
