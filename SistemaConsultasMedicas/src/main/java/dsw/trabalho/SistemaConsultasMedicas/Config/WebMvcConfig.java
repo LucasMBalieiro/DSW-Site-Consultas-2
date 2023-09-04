@@ -4,47 +4,51 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import java.util.List;
+import java.util.Locale;
 
 import com.fasterxml.jackson.datatype.jdk8.Jdk8Module;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.format.FormatterRegistry;
+import org.springframework.web.servlet.LocaleResolver;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
+import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 
-@Slf4j
 @Configuration
-@RequiredArgsConstructor
-@SuppressWarnings({"unchecked", "rawtypes"})
-class WebMvcConfig implements WebMvcConfigurer {
-    private final List<SerdeProvider<?>> serdeProviders;
+@ComponentScan(basePackages = "dsw.trabalho.SistemaConsultasMedicas.Config")
+public class WebMvcConfig implements WebMvcConfigurer {
 
-    @Override
-    public void addFormatters(FormatterRegistry registry) {
-        for (SerdeProvider<?> provider : serdeProviders) {
-            log.info("Add custom formatter for field type '{}'", provider.getType());
-            registry.addFormatterForFieldType(provider.getType(), provider.getTypedFieldFormatter());
-        }
+    public void addViewControllers(ViewControllerRegistry registry) {
+        registry.addViewController("/").setViewName("redirect:/home");
+        registry.addViewController("/home").setViewName("home");
+        registry.addViewController("/login").setViewName("login");
     }
 
     @Bean
-    public ObjectMapper objectMapper() {
-        return new ObjectMapper()
-                .registerModule(new Jdk8Module())
-                .registerModule(new JavaTimeModule())
-                .registerModule(customSerDeModule())
-                .disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
+    public LocaleResolver localeResolver() {
+        SessionLocaleResolver slr = new SessionLocaleResolver();
+        slr.setDefaultLocale(new Locale("pt", "BR"));
+        return slr;
     }
 
-    public com.fasterxml.jackson.databind.Module customSerDeModule() {
-        final var module = new SimpleModule("Custom SerDe module");
-        for (SerdeProvider provider : serdeProviders) {
-            log.info("Add custom serde for type '{}'", provider.getType());
-            module.addSerializer(provider.getType(), provider.getJsonSerializer());
-            module.addDeserializer(provider.getType(), provider.getJsonDeserializer());
-        }
-        return module;
+    @Bean
+    public LocaleChangeInterceptor localeChangeInterceptor() {
+        LocaleChangeInterceptor lci = new LocaleChangeInterceptor();
+        lci.setParamName("lang");
+        return lci;
     }
+
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        registry.addInterceptor(localeChangeInterceptor());
+    }
+
+
 }
