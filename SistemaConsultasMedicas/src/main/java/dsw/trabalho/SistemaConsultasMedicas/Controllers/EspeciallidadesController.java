@@ -19,11 +19,11 @@ public class EspeciallidadesController {
     @GetMapping("/medicos")
     public String listar(@RequestParam(value = "especialidade", required = false) String especialidade, ModelMap model) {
         if (especialidade != null && !especialidade.isEmpty()) {
-            model.addAttribute("especialidade", medicoService.buscarPorEspecialidade(especialidade));
+            model.addAttribute("medicos", medicoService.buscarPorEspecialidade(especialidade));
         } else {
-            model.addAttribute("especialidade", medicoService.buscarTodos());
+            model.addAttribute("medicos", medicoService.buscarTodos());
         }
-        model.addAttribute("cidades", medicoService.buscarTodasEspecialidades());
+        model.addAttribute("especialidade", medicoService.buscarTodasEspecialidades());
         return "lista_especialidades";
     }
 }

@@ -20,6 +20,10 @@ medico.crm.label=CRM
 medico.email.label=E-mail
 medico.especialidade.label=Especialidade
 medico.password.label=Senha
+medico.lista.label = Lista de Medicos
+medico.listartodos.label = Listar todos os medicos
+medico.botao.filtrar.label = Filtrar medicos
+medico.botao.voltar.label = Voltar para login
 
 # Titulos Usuario
 usuario.cadastrar.label=Cadastrar Usuário
