@@ -94,6 +94,11 @@
             </tbody>
         </table>
     </div>
+    <div class="container text-center mt-4">
+        <a class="btn btn-primary" th:href="@{/admin/cadastrarPaciente}" role="button" sec:authorize="hasRole('ROLE_admin')">
+            <span class="oi oi-plus" title="Cadastro" aria-hidden="true"></span>
+            <span th:text="#{paciente.nova.label}"></span>
+        </a>
     </div>
 
     <div th:replace="fragments/modal :: modal"></div>
