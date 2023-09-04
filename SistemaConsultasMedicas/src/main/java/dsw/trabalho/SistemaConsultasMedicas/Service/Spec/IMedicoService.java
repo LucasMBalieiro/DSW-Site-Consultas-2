@@ -25,4 +25,6 @@ public interface IMedicoService {
     public void excluirPorCrm(Crm id);
 
     public void excluirPorID(UUID id);
+
+    public List<String> buscarTodasEspecialidades();
 }
