@@ -13,7 +13,7 @@ public interface IMedicoService {
 
     public List<String> buscarEspecialidades();
 
-    public MedicoModel buscarMedicoPorCRM(Crm crm);
+    public MedicoModel buscarMedicoPorCRM(String crm);
 
     public Optional<MedicoModel> buscarMedicoPorID(UUID id);
 
@@ -27,7 +27,7 @@ public interface IMedicoService {
 
     public void excluirPorID(UUID id);
 
-    public UUID getIdByEmail(Email email);
+    public UUID getIdByEmail(String email);
     
     public List<String> buscarTodasEspecialidades();
 }

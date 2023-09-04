@@ -21,7 +21,7 @@ public interface MedicoRepository extends JpaRepository<MedicoModel, UUID> {
     public List<MedicoModel> findByNome(@Param("nome") String nome);
 
     @Query(value = "SELECT * FROM TB_MEDICOS medicos WHERE medicos.crm = :crm", nativeQuery = true)
-    public MedicoModel findByCrm(@Param("crm") Crm crm);
+    public MedicoModel findByCrm(@Param("crm") String crm);
 
     @Query(value = "SELECT * FROM TB_MEDICOS medicos WHERE medicos.especialidade = :especialidade", nativeQuery = true)
     public List<MedicoModel> findByEspecialidade(@Param("especialidade") String especialidade);
@@ -30,7 +30,7 @@ public interface MedicoRepository extends JpaRepository<MedicoModel, UUID> {
     public List<String> findEspecialidades();
 
     @Query(value = "SELECT userID FROM TB_MEDICOS medicos WHERE medicos.email = :email", nativeQuery = true)
-    public UUID findIdByEmail(@Param("email") Email email);
+    public UUID findIdByEmail(@Param("email") String email);
 
 
     void deleteByCrm(Crm id);

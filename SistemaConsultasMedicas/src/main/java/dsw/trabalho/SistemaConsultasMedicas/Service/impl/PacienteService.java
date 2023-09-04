@@ -41,5 +41,5 @@ public class PacienteService implements IPacienteService {
     }
 
     @Transactional(readOnly = true)
-    public UUID getIdByEmail(Email email){ return pacienteRepository.findIdByEmail(email); }
+    public UUID getIdByEmail(String email){ return pacienteRepository.findIdByEmail(email); }
 }

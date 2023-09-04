@@ -14,10 +14,10 @@ import java.util.UUID;
 public interface PacienteRepository extends JpaRepository<PacienteModel, UUID> {
 
     @Query(value = "SELECT * FROM TB_PACIENTES pacientes WHERE pacientes.cpf = :cpf", nativeQuery = true)
-    public PacienteModel findByCpf(@Param("cpf") Cpf cpf);
+    public PacienteModel findByCpf(@Param("cpf") String cpf);
 
     @Query(value = "SELECT userID FROM TB_PACIENTES pacientes WHERE pacientes.email = :email", nativeQuery = true)
-    public UUID findIdByEmail(@Param("email") Email email);
+    public UUID findIdByEmail(@Param("email") String email);
 
     void deleteByCpf(Cpf cpf);
 }

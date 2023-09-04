@@ -20,5 +20,5 @@ public interface IPacienteService {
 
     public Optional<PacienteModel> buscarPorID(UUID id);
 
-    public UUID getIdByEmail(Email email);
+    public UUID getIdByEmail(String email);
 }

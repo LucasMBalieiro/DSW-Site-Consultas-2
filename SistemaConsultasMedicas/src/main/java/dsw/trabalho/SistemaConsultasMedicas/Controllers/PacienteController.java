@@ -67,7 +67,7 @@ public class PacienteController {
             email = ((UserDetails)principal).getUsername();
         }
 
-        UUID idPaciente = paciente.getIdByEmail(new Email(email));
+        UUID idPaciente = paciente.getIdByEmail(email);
         model.addAttribute("consultas", consulta.buscarPorMedico(idPaciente));
         return "medico/lista";
     }

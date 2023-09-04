@@ -19,7 +19,7 @@ public class UsuarioDetailsServiceImpl implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
         //todo como que usa Email aaaaaaaaa
-        UsuarioModel usuario0 = usuario.getUserByEmail(new Email(username));
+        UsuarioModel usuario0 = usuario.getUserByEmail(username);
 
         if (usuario0 == null) {
             throw new UsernameNotFoundException("Could not find user");

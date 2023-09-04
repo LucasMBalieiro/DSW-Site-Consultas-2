@@ -26,7 +26,7 @@ public class MedicoService implements IMedicoService {
     public List<String> buscarEspecialidades() { return dao.findEspecialidades(); }
 
     @Transactional(readOnly = true)
-    public MedicoModel buscarMedicoPorCRM(Crm crm) { return dao.findByCrm(crm); }
+    public MedicoModel buscarMedicoPorCRM(String crm) { return dao.findByCrm(crm); }
 
     @Transactional(readOnly = true)
     public Optional<MedicoModel> buscarMedicoPorID(UUID id) { return dao.findById(id); }
@@ -40,7 +40,7 @@ public class MedicoService implements IMedicoService {
     }
 
     @Transactional(readOnly = true)
-    public UUID getIdByEmail(Email email){ return dao.findIdByEmail(email); }
+    public UUID getIdByEmail(String email){ return dao.findIdByEmail(email); }
 
     public void salvar(MedicoModel medico) { dao.save(medico); }
 
