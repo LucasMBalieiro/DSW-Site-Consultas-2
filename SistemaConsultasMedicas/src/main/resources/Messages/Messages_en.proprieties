@@ -81,6 +81,7 @@ remove.label.message=Click OK to proceed with the deletion...
 # Button & Checkbox Messages
 link.excluir.label=Delete
 link.editar.label=Edit
+link.adicionar.label = Add
 button.cancelar.label=Cancel
 button.salvar.label=Save
 select.label=Select...

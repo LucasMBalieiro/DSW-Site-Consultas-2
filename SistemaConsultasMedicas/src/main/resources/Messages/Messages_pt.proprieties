@@ -81,6 +81,7 @@ remove.label.message=Clique em OK para proceder com a exclusão...
 link.excluir.label=Excluir
 link.editar.label=Editar
 button.cancelar.label=Cancelar
+link.adicionar.label = Adicionar
 button.salvar.label=Salvar
 select.label=Selecione...
 acao.label=Ação
