@@ -42,15 +42,25 @@ public class WebSecurityConfig{
         http
                 .authorizeHttpRequests((authz) -> authz
                         .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
-                        .requestMatchers("/home").permitAll() // acho que nao precisa, mas deixar de precaucao
-                        .requestMatchers("/login").permitAll() //tmb acho que nao precisa
+                        .requestMatchers("/home").permitAll()
+                        .requestMatchers("/login").permitAll()
                         .requestMatchers("/admin/**").hasRole("admin")
                         .requestMatchers("/medico/**").hasRole("medico")
                         .requestMatchers("/paciente/**").hasRole("paciente")
                         .anyRequest().authenticated()
                 )
+                .formLogin((form) -> form
+                        .loginPage("/login")
+                        .permitAll()
+                )
+                .logout((logout) -> logout
+                        .logoutSuccessUrl("/")
+                        .permitAll()
+                )
                 .httpBasic(withDefaults());
+
         return http.build();
     }
+
 
 }
