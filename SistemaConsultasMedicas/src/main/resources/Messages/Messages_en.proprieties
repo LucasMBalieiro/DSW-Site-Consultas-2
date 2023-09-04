@@ -23,6 +23,10 @@ medico.crm.label=CRM
 medico.email.label=Email
 medico.especialidade.label=Specialty
 medico.password.label=Password
+medico.lista.label = List of Medics
+medico.listartodos.label = List all medics
+medico.botao.filtrar.label = Filter medics
+medico.botao.voltar.label = Back to login
 
 # User Titles
 usuario.cadastrar.label=Register User
